@@ -1094,6 +1094,56 @@ h3{font-size:clamp(1.15rem, 2vw, 1.4rem); font-weight:700; letter-spacing:-.018e
   .compare tr.is-key th{padding-bottom:var(--s4)}
 }
 
+/* ─────────── portrait mobile only ───────────
+   Additive block, appended after every other comparison rule. Both
+   conditions must hold: desktop (>720px) never matches, and a phone in
+   LANDSCAPE never matches, so both keep exactly their current rendering.
+   Every selector is .compare-prefixed — nothing global is touched. */
+@media (max-width:720px) and (orientation:portrait){
+
+  /* The 24px paper overhang belongs to the desktop COLUMN panel. In the
+     stacked layout there is no column, so it rendered as a stray white
+     slab over the row beneath. */
+  .compare tbody tr:last-child td.compare__fs::after{display:none}
+
+  /* Bind each group: heading close to its values, air between groups. */
+  .compare tbody tr{padding:var(--s5) 0 var(--s6)}
+  .compare tbody th{padding-bottom:var(--s3); font-size:1.05rem}
+
+  /* 104px clears "WOOD SPRUNG" and "FOAM SQUISH" on one line at 11px mono;
+     the old 10ch resolved to ~75px and forced the two-line wrap. */
+  .compare tbody td{
+    grid-template-columns:104px minmax(0,1fr);
+    gap:10px;
+    padding:8px 12px;
+    align-items:baseline;
+  }
+  .compare tbody td::before{
+    letter-spacing:.1em;
+    white-space:nowrap;
+    padding-top:0;
+  }
+
+  /* The FS value aligns to the same left edge as every other row instead
+     of hanging 8px outside it. Card, not bleeding banner. */
+  .compare tbody td.compare__fs{
+    margin-left:0;
+    padding:10px 12px;
+    border-radius:0;
+    box-shadow:none;
+    margin-bottom:2px;
+  }
+
+  .compare tr.is-key th,
+  .compare tr.is-key td{padding-top:8px; padding-bottom:8px}
+  .compare tr.is-key th{padding-bottom:var(--s3)}
+
+  /* Hover tint is meaningless on touch and sticks after a tap. */
+  .compare tbody tr:hover th,
+  .compare tbody tr:hover td{background:none}
+  .compare tbody tr:hover td.compare__fs{background:var(--paper)}
+}
+
 /* ══════════════════════════════════════════════════════════════
    08 · RANGE
    Light, alternating band. Typographic and spec-driven — the four floors
