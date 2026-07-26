@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scroll mechanic reference — pin, scale, overlap</title>
+<style>
+  :root{
+    --ink:#111315;
+    --ink-2:#1c1f22;
+    --bone:#EDEAE4;
+    --bone-2:#DAD5CB;
+    --accent:#B8704A;
+    --measure:34rem;
+    --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{
+    margin:0;
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- intro ---------- */
+  .intro{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:18vh 1.5rem 14vh;
+  }
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 1.25rem;
+  }
+  .intro h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2rem,5vw,3.1rem);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    margin:0 0 1.25rem;
+  }
+  .intro p{
+    font-size:1.02rem;
+    line-height:1.6;
+    margin:0 0 1rem;
+    color:#3a3f44;
+  }
+  .cue{
+    margin-top:3rem;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#7a8087;
+  }
+
+  /* ---------- MECHANIC 1 + 2: pin, scale to full bleed, text rise ---------- */
+  /* The tall outer container is the scroll runway. Its height controls how long
+     the pinned panel stays on screen. 300vh = roughly two screens of scrolling
+     while pinned. */
+  .stage{ position:relative; height:320vh; }
+
+  /* The panel pins itself to the viewport while the runway scrolls past.
+     NOTE: position:sticky fails silently if ANY ancestor has overflow:hidden.
+     That is the number one cause of "why won't it pin". */
+  .pin{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    background:var(--bone);
+  }
+
+  /* The frame is sized to the full viewport, then scaled DOWN at rest.
+     Animating one transform is far smoother than animating width/height,
+     which would force layout on every scroll frame. */
+  .frame{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    transform:scale(.58);
+    border-radius:14px;
+    overflow:hidden;
+    will-change:transform;
+    background:var(--ink);
+  }
+
+  /* Stand-in for a photograph. Suggests a lattice so the demo reads as
+     "material" rather than a gray box. Replace with a real image. */
+  .plate{
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 2px, transparent 2px 74px),
+      repeating-linear-gradient(0deg,  rgba(255,255,255,.10) 0 2px, transparent 2px 74px),
+      radial-gradient(120% 90% at 30% 15%, #34393e 0%, #16191c 55%, #0c0e10 100%);
+    transform:scale(1.12);
+    will-change:transform;
+  }
+  .vignette{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,.72) 100%);
+  }
+
+  /* Copy rises from the bottom once the frame is most of the way open. */
+  .caption{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:0 clamp(1.5rem,6vw,6rem) clamp(2.5rem,7vh,5rem);
+    color:var(--bone);
+  }
+  .caption .line{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(1.6rem,4.4vw,3.4rem);
+    line-height:1.08;
+    letter-spacing:-.02em;
+    margin:0;
+    max-width:22ch;
+    opacity:0;
+    transform:translateY(2.2rem);
+    will-change:transform,opacity;
+  }
+  .caption .sub{
+    margin:1rem 0 0;
+    max-width:44ch;
+    font-size:1rem;
+    line-height:1.55;
+    color:rgba(237,234,228,.74);
+    opacity:0;
+    transform:translateY(1.6rem);
+    will-change:transform,opacity;
+  }
+
+  /* progress readout, demo only — delete in production */
+  .readout{
+    position:fixed;
+    left:1rem; bottom:1rem;
+    z-index:50;
+    font-size:.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    background:rgba(17,19,21,.86);
+    color:var(--bone);
+    padding:.5rem .7rem;
+    border-radius:5px;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- MECHANIC 3: the overlap ---------- */
+  /* Because .pin is sticky, the next section simply scrolls up over it once the
+     runway ends. Raising z-index and pulling it up with a negative margin makes
+     the covering read as deliberate rather than accidental. */
+  .cover{
+    position:relative;
+    z-index:2;
+    margin-top:-8vh;
+    border-radius:26px 26px 0 0;
+    background:var(--ink);
+    color:var(--bone);
+    padding:clamp(4rem,12vh,9rem) 1.5rem clamp(6rem,16vh,12rem);
+    box-shadow:0 -30px 60px rgba(0,0,0,.25);
+  }
+  .cover-inner{ max-width:var(--measure); margin:0 auto; }
+  .cover h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(1.6rem,3.4vw,2.4rem);
+    letter-spacing:-.015em;
+    line-height:1.15;
+    margin:0 0 1.25rem;
+  }
+  .cover p{ line-height:1.65; color:rgba(237,234,228,.72); margin:0 0 1rem; }
+
+  .notes{ margin-top:3rem; border-top:1px solid rgba(237,234,228,.16); padding-top:1.75rem; }
+  .notes h3{
+    font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 1rem;
+  }
+  .notes ul{ margin:0; padding-left:1.1rem; }
+  .notes li{ line-height:1.6; margin-bottom:.7rem; color:rgba(237,234,228,.72); }
+
+  /* Anyone who has asked their OS to calm down gets the end state, no scrubbing. */
+  @media (prefers-reduced-motion: reduce){
+    .frame{ transform:none; border-radius:0; }
+    .caption .line,.caption .sub{ opacity:1; transform:none; }
+    .readout{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="readout" id="readout">progress 0%</div>
+
+<section class="intro">
+  <p class="eyebrow">Mechanic reference</p>
+  <h1>Pin, scale to full bleed, then let the next section cover it.</h1>
+  <p>Three separate techniques stacked into one move. Scroll slowly and each one
+     separates out: the panel pins itself, the frame grows edge to edge, the copy
+     rises, then the following section slides up over the whole thing.</p>
+  <p>No libraries. Roughly forty lines of JavaScript driving one CSS transform.
+     The comments in the source explain what each piece does and where it breaks.</p>
+  <p class="cue">Scroll ↓</p>
+</section>
+
+<!-- runway: its height decides how long the pin lasts -->
+<section class="stage" id="stage">
+  <div class="pin">
+    <figure class="frame" id="frame">
+      <div class="plate" id="plate"></div>
+      <div class="vignette"></div>
+      <figcaption class="caption">
+        <p class="line" id="line">Placeholder headline sits here.</p>
+        <p class="sub" id="sub">And a supporting line underneath it, arriving a beat later.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="cover">
+  <div class="cover-inner">
+    <h2>The section above is still pinned behind this one.</h2>
+    <p>It never unmounted. The runway ran out of height, so this panel scrolled up
+       over it. The negative top margin and the rounded top edge are what make it
+       read as intentional rather than as a seam.</p>
+    <p>Scroll back up and the whole sequence reverses cleanly, because the effect
+       is driven by scroll position rather than by one-way triggers.</p>
+
+    <div class="notes">
+      <h3>Things that break this</h3>
+      <ul>
+        <li>Any ancestor with <code>overflow:hidden</code> kills <code>position:sticky</code> silently. Check this first.</li>
+        <li>Animating width or height instead of transform causes visible stutter on mid-range phones.</li>
+        <li>On phones, scrub scrolling fights the browser's address bar. Better to drop the pin below about 900px and play the reveal once on entry.</li>
+        <li>The effect only works with one genuinely strong image. A mediocre photo enlarged to full screen is a mediocre photo, only bigger.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var stage   = document.getElementById('stage');
+  var frame   = document.getElementById('frame');
+  var plate   = document.getElementById('plate');
+  var line    = document.getElementById('line');
+  var sub     = document.getElementById('sub');
+  var readout = document.getElementById('readout');
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var REST = 0.58;   // frame size at rest, as a fraction of the viewport
+  var ticking = false;
+
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+  // Progress from 0 to 1 across the runway. This single number drives everything.
+  function progress() {
+    var r = stage.getBoundingClientRect();
+    var travel = r.height - window.innerHeight;
+    if (travel <= 0) return 0;
+    return clamp(-r.top / travel, 0, 1);
+  }
+
+  // Slow start, quick middle, soft landing. Linear scroll feels mechanical.
+  function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+
+  function render() {
+    var p = progress();
+
+    // 1. the frame opens across roughly the first 60% of the runway
+    var open  = ease(clamp(p / 0.6, 0, 1));
+    var scale = REST + (1 - REST) * open;
+    frame.style.transform    = 'scale(' + scale.toFixed(4) + ')';
+    frame.style.borderRadius = (14 * (1 - open)).toFixed(1) + 'px';
+
+    // 2. the image drifts slightly slower than the frame. That difference is
+    //    all parallax actually is.
+    plate.style.transform = 'scale(' + (1.12 - 0.12 * open).toFixed(4) + ')';
+
+    // 3. copy rises once the frame is mostly open, the second line trailing
+    var a1 = clamp((p - 0.46) / 0.22, 0, 1);
+    var a2 = clamp((p - 0.56) / 0.22, 0, 1);
+    line.style.opacity   = a1;
+    line.style.transform = 'translateY(' + (2.2 * (1 - a1)).toFixed(2) + 'rem)';
+    sub.style.opacity    = a2;
+    sub.style.transform  = 'translateY(' + (1.6 * (1 - a2)).toFixed(2) + 'rem)';
+
+    readout.textContent = 'progress ' + Math.round(p * 100) + '%';
+    ticking = false;
+  }
+
+  // rAF throttle: never do layout math more than once per painted frame
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(render); }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  render();
+})();
+</script>
+</body>
+</html>

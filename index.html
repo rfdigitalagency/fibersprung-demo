@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>FiberSprung — Patented Fiberglass Sprung Floors for Dance and Theater</title>
+<meta name="description" content="Sprung flooring built on a patented fiberglass grid. 30+ year materials, 20 year warranty, flood resistant, portable, and resaleable. Installed at Pace University, SUNY Purchase, and professional companies nationwide.">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Hero image: preloaded, never lazy-loaded. -->
+<link rel="preload" as="image" href="images/01-hero/hero-lattice-maple.jpg" fetchpriority="high">
+
+<link rel="stylesheet" href="styles.css">
+
+<!-- Progressive enhancement guard. Every hidden-before-reveal state in
+     styles.css is scoped to html.js, so the default rendering — no JS, JS
+     disabled, script.js 404s, CSP blocks it — is fully visible content with
+     no animation. This runs synchronously before first paint, so there is no
+     flash of visible-then-hidden.
+
+     NO TIMER. A fixed timeout races the network and loses: script.js sits at
+     the end of body behind a 232KB preloaded hero, so on throttled 3G it runs
+     at ~5.6s, and on Fast 3G at ~2.7s. Any timeout short enough to be useful
+     fires during a NORMAL slow load, flashing the page visible and then
+     animating it — which reads as a bug, not a fallback.
+
+     These three signals are deterministic instead, and none of them can fire
+     while the script is merely still downloading:
+       onerror on the tag  — 404, network failure, CSP block. Immediate.
+       window 'error'      — script.js loaded but failed to parse. Immediate.
+       window 'load'       — backstop; everything finished, still no report.
+
+     The 'error' listener is bubble phase, NOT capture, and additionally
+     filters on event.target. Both matter. Resource errors from <img> do not
+     bubble, but they DO reach window in capture phase — and this page carries
+     26 images. One 404 during development would otherwise strip html.js and
+     silently kill every animation, which looks like the reveal system is
+     broken rather than like a file is missing. The target check keeps that
+     true even if capture is ever switched on for something else. -->
+<script>
+(function () {
+  var d = document.documentElement;
+  d.className += (d.className ? ' ' : '') + 'js';
+
+  function failOpen(e) {
+    // Resource errors (<img>, <link>, fonts) fire on the element itself.
+    // Script parse errors and the window load event target window/document.
+    // Anything else is a resource problem and is none of our business.
+    if (e && e.target && e.target !== window && e.target !== document) return;
+
+    if (d.hasAttribute('data-reveal-ready')) return;   // it reported in, nothing to do
+    d.className = d.className.replace(/(^|\s)js(\s|$)/, '$1$2');
+  }
+
+  // Called by the script tag's onerror with no event argument, which skips
+  // the target check by design — that path is already known-good.
+  window.fsFailOpenGuard = function () { failOpen(); };
+
+  window.addEventListener('error', failOpen, false);
+  window.addEventListener('load', failOpen, false);
+})();
+</script>
+</head>
+<body id="top">
+
+<a class="skip" href="#hero-title">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="#top" aria-label="FiberSprung — home">
+      <!-- brand/logo-primary.svg, inlined. Green square via var(--green) so it
+           tracks the token; marks stay white per the primary lockup. -->
+      <svg class="brand__mark" viewBox="0 0 430 430" role="img" aria-label="FiberSprung">
+        <title>FiberSprung</title>
+        <rect width="430" height="430" rx="24" fill="var(--green)"/>
+        <g fill="#FFFFFF">
+          <rect x="58" y="56" width="314" height="32"/>
+          <rect x="58" y="342" width="314" height="32"/>
+          <path d="M73.61 300.73L73.61 159.86A34.24 34.24 0 0 1 116.36 122.92L120.21 122.92L131.06 122.92L194.08 122.92A7.71 7.71 0 0 1 203.62 133.56L203.61 151.34A4.93 4.93 0 0 1 197.76 157.92L126.99 157.92A11.91 11.91 0 0 0 112.11 171.28L112.11 185.28L112.11 191.76A5.68 5.68 0 0 0 120.87 197.26L190.75 197.26A3.83 3.83 0 0 1 194.78 202.08L194.78 226.82A4.18 4.18 0 0 1 189.16 231.76L116.47 231.76A3.44 3.44 0 0 0 112.32 236.42L112.11 243.56L112.11 301.38A4.9 4.9 0 0 1 105.57 307.09L80.25 307.09A5.16 5.16 0 0 1 73.61 300.73Z"/>
+          <path d="M222.28 299.24L222.28 280.34A6.65 6.65 0 0 1 231.81 272.26L304.57 272.26A21.21 21.21 0 0 0 294.45 231.08L265.33 231.08A44.24 44.24 0 0 1 220.41 178.32A47.24 47.24 0 0 1 259.42 122.92L338.71 122.92A6.26 6.26 0 0 1 347.11 131.02L347.11 142.32L347.11 149.83A6.0 6.0 0 0 1 339.42 157.92L278.4 157.92A15.9 15.9 0 0 0 259.59 178.14A13.93 13.93 0 0 0 274.02 195.42L289.61 195.08L305.37 195.08A45.41 45.41 0 0 1 356.39 249.4A49.21 49.21 0 0 1 319.42 307.09L230.65 307.09A6.23 6.23 0 0 1 222.28 299.24Z"/>
+        </g>
+      </svg>
+      <span class="brand__word">FiberSprung</span>
+    </a>
+
+    <!-- On-page anchors only. Targets are built in later sections. -->
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#technology">Technology</a>
+      <a href="#process">Process</a>
+      <a href="#range">Range</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════ 01 · HERO ═══════════════
+       Immediate, not scroll-revealed. Full bleed from first paint, finished
+       and full within the first second. No pin, no scale-up entrance — the
+       pin/scale/overlap mechanic now lives in section 04.
+
+       Only two pieces of motion, both CSS, neither scroll-linked:
+         · ambient scale drift on the image, 1.0 → 1.04, ~20s, ease-in-out
+         · one entrance stagger on the text, once, on load
+
+       No .js scoping needed here. The text sits at opacity 1 in the base
+       rules and the entrance runs from a keyframe with animation-fill-mode
+       backwards, so if animation never runs — no CSS animation support, JS
+       irrelevant — the h1 and CTAs are simply already visible. -->
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+
+    <!-- FILE SWAP PENDING: hero-lattice-maple.jpg is 1440×1440. It runs full
+         bleed here, which upscales it roughly 1.4× on a 1440p display and
+         2.7× on 4K — below the design system's 2000px+ full-bleed floor.
+         Request a higher-resolution master of this frame from Micah and
+         drop it in at the same path; update width/height below to match. -->
+    <!-- The parallax plane: image AND text drift together at 0.35× scroll,
+         the page overtakes both. JS translates this wrapper; the ambient
+         drift animation stays on the <img> inside — separate elements,
+         because a CSS animation on transform beats an inline transform on
+         the same element.
+         The scrim rides inside the plane, between image and text — over the
+         image, under the caption, so CTAs stay clickable. Drifting with the
+         plane is safe: the unscrimmed strip it leaves at the hero's bottom
+         is 0.35× the scroll distance tall, while the cover section has
+         already climbed 1.0× — the cover always hides it. -->
+    <div class="hero__plane" id="hero-plane">
+      <div class="hero__media">
+        <img class="hero__img"
+             src="images/01-hero/hero-lattice-maple.jpg"
+             width="1440" height="1440"
+             fetchpriority="high" decoding="async"
+             alt="FiberSprung fiberglass grid installed over a maple floor, Boston installation">
+      </div>
+
+      <div class="hero__scrim" aria-hidden="true"></div>
+
+      <div class="hero__caption">
+        <div class="wrap">
+          <!-- COPY ADDITION — hero eyebrow, RF Digital; wording lifted from the
+               opening of the approved subhead. Logged in copy-changes.md. -->
+          <p class="hero__eyebrow">Patented fiberglass sprung flooring</p>
+          <h1 class="hero__title" id="hero-title">Your Forever Floor</h1>
+          <!-- COPY EDIT — em dash → period, per RF Digital 2026-07-25. Logged.
+               copy.md original: "…performance — engineered to outlast…" -->
+          <p class="hero__sub">Patented fiberglass sprung flooring for dance, theater, and performance. Engineered to outlast the room it's installed in.</p>
+          <div class="hero__actions">
+            <a class="btn btn--on-dark" href="#contact">Request a quote</a>
+            <a class="btn btn--ghost-dark" href="#technology">See the technology</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- ═══════════════ 02 · RECOGNITION ═══════════════
+       Light. The cover panel: the hero beneath is sticky, so this section
+       scrolls up over it in normal flow. A credential wall, not a footnote —
+       names in the display face at ~22px, full ink, moving in a single-row
+       marquee.
+
+       Accessibility contract: the static <ul class="recog-static"> is the
+       ONLY copy of the names exposed to assistive tech. The entire marquee is
+       aria-hidden — including its duplicate set — so screen readers hear the
+       nine names exactly once, in order, motionless. Under reduced motion the
+       marquee is display:none and the static list becomes the visible,
+       centered band.
+
+       USAGE RIGHTS PENDING: display only the names FiberSprung confirms in
+       writing. NBC Universal appears three times below (static list + two
+       marquee sets); each is wrapped, and one search on the token finds all. -->
+  <section class="band cover" id="recognition" aria-labelledby="recognition-label" data-reveal-stagger>
+    <div class="wrap">
+      <!-- COPY EDIT — RF Digital, pending approval. copy.md: "Installed and
+           trusted at". See copy-changes.md. -->
+      <p class="eyebrow eyebrow--center js-reveal" id="recognition-label">Trusted by universities and companies nationwide</p>
+    </div>
+
+    <!-- Assistive-tech source of truth; visible centered band under reduced motion. -->
+    <ul class="recog-static">
+      <li>Pace University</li>
+      <li>SUNY Purchase College</li>
+      <!-- RIGHTS-PENDING-NAME: corporate mark, remove if written usage is not confirmed -->
+      <li>NBC Universal</li>
+      <!-- /RIGHTS-PENDING-NAME -->
+      <li>Hunter Dance Center</li>
+      <li>Newport Contemporary Ballet</li>
+      <li>Bayou City Ballet</li>
+      <li>Kanyok Arts Initiative</li>
+      <li>Traverse City Dance Project</li>
+      <li>Newnan Theater Company</li>
+    </ul>
+
+    <!-- Decorative motion only. ~38s loop, pauses on hover. Seamless because
+         the track holds two identical sets and translates exactly −50%. -->
+    <div class="marquee js-reveal" aria-hidden="true">
+      <div class="marquee__track">
+        <ul class="marquee__set">
+          <li><img src="images/07-recognition/recog-pace-university.webp" width="1024" height="580" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-suny-purchase.jpg" width="1979" height="669" alt="" loading="lazy" decoding="async"></li>
+          <!-- RIGHTS-PENDING-NAME --><li><img src="images/07-recognition/recog-nbc-universal.png" width="860" height="374" alt="" loading="lazy" decoding="async"></li><!-- /RIGHTS-PENDING-NAME -->
+          <li><img src="images/07-recognition/recog-hunter-dance-center.png" width="1991" height="1505" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-newport-contemporary-ballet.webp" width="800" height="711" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-bayou-city-ballet.png" width="2500" height="1307" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-kanyok-arts-initiative.webp" width="320" height="160" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-traverse-city-dance-project.png" width="328" height="153" alt="" loading="lazy" decoding="async"></li>
+          <li><img class="logo--invert" src="images/07-recognition/recog-newnan-theater-company.webp" width="1500" height="321" alt="" loading="lazy" decoding="async"></li>
+        </ul>
+        <ul class="marquee__set">
+          <li><img src="images/07-recognition/recog-pace-university.webp" width="1024" height="580" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-suny-purchase.jpg" width="1979" height="669" alt="" loading="lazy" decoding="async"></li>
+          <!-- RIGHTS-PENDING-NAME --><li><img src="images/07-recognition/recog-nbc-universal.png" width="860" height="374" alt="" loading="lazy" decoding="async"></li><!-- /RIGHTS-PENDING-NAME -->
+          <li><img src="images/07-recognition/recog-hunter-dance-center.png" width="1991" height="1505" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-newport-contemporary-ballet.webp" width="800" height="711" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-bayou-city-ballet.png" width="2500" height="1307" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-kanyok-arts-initiative.webp" width="320" height="160" alt="" loading="lazy" decoding="async"></li>
+          <li><img src="images/07-recognition/recog-traverse-city-dance-project.png" width="328" height="153" alt="" loading="lazy" decoding="async"></li>
+          <li><img class="logo--invert" src="images/07-recognition/recog-newnan-theater-company.webp" width="1500" height="321" alt="" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════ 03 · THESIS ═══════════════
+       Light. One image, contained, full colour (payoff grade). -->
+  <section class="band" id="thesis" aria-labelledby="thesis-title">
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+        <p class="eyebrow js-reveal">Why fiberglass</p>
+
+        <div class="thesis__intro">
+          <div class="thesis__lead">
+            <h2 class="h2 js-reveal" id="thesis-title">A floor should outlive the studio it's built in.</h2>
+            <p class="lede js-reveal">FiberSprung is the future of sprung flooring. Our patented fiberglass grid provides the spring to our floors, ensuring sustainable, consistent support for years. Our floors are portable and can move with you from studio to studio, or even be resold. A purchase of a FiberSprung floor is an investment in an asset for your business.</p>
+
+            <!-- Spec block lives in the left column now, 2×2, balancing the
+                 full-height figure on the right. data-count numerals count
+                 up from 0 on first entry; "~6 weeks" is not a countable
+                 number and only fades in with the block. -->
+            <dl class="specs specs--thesis js-reveal">
+              <div><dt class="k">Year material life</dt><dd class="v" data-count>30+</dd></div>
+              <div><dt class="k">Year grid warranty</dt><dd class="v" data-count>20</dd></div>
+              <div><dt class="k">Deflection, every test</dt><dd class="v" data-count>3mm</dd></div>
+              <div><dt class="k">Lead time from order</dt><dd class="v">~6 weeks</dd></div>
+            </dl>
+          </div>
+
+          <figure class="figure js-reveal">
+            <img class="grade-payoff"
+                 src="images/05-finished/finished-university-studio.jpg"
+                 width="1440" height="1800"
+                 loading="lazy" decoding="async"
+                 alt="Completed FiberSprung floor with grey marley surface in a university dance studio">
+          </figure>
+        </div>
+      </div>
+
+      <div class="cols pillars" data-reveal-stagger>
+        <!-- COPY EDIT — pending Micah's approval. Words removed, none added.
+             ORIGINAL (copy.md): "The materials within our fiberglass grid are
+             chosen to have an over 30 year use life, and all of our floors are
+             designed to be disassembled and moved without losing any of their
+             spring. Protect your flooring investment with FiberSprung."
+             CHANGE: dropped the closing marketing line; split one 40-word
+             sentence into two. 40 words → 28. The "designed to" hedge is kept. -->
+        <div class="js-reveal">
+          <span class="pillar__num" aria-hidden="true">01</span>
+          <h3>Sustainability</h3>
+          <p>The materials in our fiberglass grid are chosen for an over <span class="mono">30</span> year use life. Floors are designed to disassemble and move without losing any of their spring.</p>
+        </div>
+
+        <!-- Verbatim from copy.md. Left alone: the first sentence already
+             carries the whole point, and "Day 1 to Day 3001" is theirs. -->
+        <div class="js-reveal">
+          <span class="pillar__num" aria-hidden="true">02</span>
+          <h3>Consistency</h3>
+          <p>FiberSprung subfloors are consistent from Day <span class="mono">1</span> to Day <span class="mono">3001</span>. The fiberglass within a FiberSprung floor is designed for bend and is nowhere near its ultimate failure load. This allows the composite materials to retain their material properties.</p>
+        </div>
+
+        <!-- COPY EDIT — pending Micah's approval. Words removed, none added.
+             ORIGINAL (copy.md): "Lifetime customer support begins with great
+             design. FiberSprung floors are designed to be easily disassembled
+             and repaired. Damage happens in studios sometimes, and it's no
+             one's fault. Our fiberglass grid is designed to withstand water
+             damage, and our floor surface can be lifted within minutes —
+             ensuring minimal cost to repair a floor."
+             CHANGE: cut sentence 1 (throat-clearing) and sentence 2 (redundant
+             with "lifts within minutes"). The point now lands first, not
+             fourth. 53 words → 29. "designed to withstand water damage" is
+             preserved exactly — that hedge carries legal weight and must not
+             become the flat claim "withstands water damage". -->
+        <div class="js-reveal">
+          <span class="pillar__num" aria-hidden="true">03</span>
+          <h3>Support</h3>
+          <p>Damage happens in studios sometimes, and it's no one's fault. Our fiberglass grid is designed to withstand water damage, and the surface lifts within minutes — minimal cost to repair.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 04 · REVEAL ═══════════════
+       Light → Dark. The photograph is the seam: text sits on concrete above it,
+       graphite begins below it, and the page stays dark through 05 and 06.
+       One image, full bleed, technical grade. -->
+  <section class="reveal" id="reveal" aria-labelledby="reveal-title">
+
+    <div class="reveal__top">
+      <div class="wrap" data-reveal-stagger>
+        <p class="eyebrow js-reveal">Beneath the surface</p>
+        <h2 class="h2 js-reveal" id="reveal-title">What you dance on is not what holds you up.</h2>
+        <p class="lede js-reveal">Every FiberSprung floor is two things: a performance surface you can see, and a patented fiberglass grid you never will. The grid is where the spring lives, and it is the reason these floors survive what wooden floors do not.</p>
+      </div>
+    </div>
+
+    <!-- FILE SWAP PENDING: reveal-grid-to-floor.jpg is 1440×1440 and runs full
+         bleed per the mapping, so it upscales above a 1440px viewport. Same
+         request as the hero — ask Micah for a wider master of this frame and
+         drop it in at the same path, updating width/height to match. -->
+    <figure class="reveal__figure js-reveal">
+      <img class="grade-technical"
+           src="images/02-reveal/reveal-grid-to-floor.jpg"
+           width="1440" height="1440"
+           loading="lazy" decoding="async"
+           alt="Exposed fiberglass grid meeting the finished plywood support surface, SUNY Purchase College">
+    </figure>
+
+  </section>
+
+  <!-- ═══════════════ 05 · TECHNOLOGY ═══════════════
+       Dark. The moat against wood and foam. Technical grade on every image.
+       The bend test is the centerpiece: presented as a data comparison, not
+       a paragraph. Figures are exact and must never be rounded. -->
+  <!-- Pin-scale-overlap, per design-system/scroll-mechanic-reference.html:
+       the runway's height decides how long the frame stays pinned; the frame
+       scales .58 → 1 across the first 60% of it; the heading and body rise
+       as it opens; then .tech-detail climbs over with the shadow edge.
+       The plane inside the frame carries the hero's 0.35× drift once the
+       frame is fully open, for continuity between the two mechanics.
+       Scrub is desktop-only and JS-gated: the runway height and rest scale
+       live under html.js at ≥900px, so no-JS, reduced-motion and mobile all
+       get a static contained frame with the caption above it. -->
+  <section class="band--dark tech" id="technology" aria-labelledby="technology-title">
+
+    <div class="tech-stage" id="tech-stage">
+      <div class="tech-stage__pin">
+        <figure class="tech-stage__frame" id="tech-frame">
+          <div class="tech-stage__plane" id="tech-plane">
+            <img class="grade-technical tech-stage__img"
+                 src="images/03-technology/tech-lattice-bw.jpg"
+                 width="1440" height="1914"
+                 loading="lazy" decoding="async"
+                 alt="Full fiberglass basket-weave grid installed at Pace University before the support surface is laid">
+            <div class="tech-stage__scrim" aria-hidden="true"></div>
+            <figcaption class="tech-stage__caption">
+              <div class="wrap">
+                <div class="tech-stage__line" id="tech-line">
+                  <p class="eyebrow">The patented grid</p>
+                  <h2 class="h2" id="technology-title">Engineered to bend the same way, every time.</h2>
+                </div>
+                <div class="tech-stage__sub" id="tech-sub">
+                  <p class="lede">The grid is the fiberglass basket-weave support structure beneath the Pro and Light floors. The fiberglass matches the bend characteristics of a classic wooden sprung floor, with far more consistency. The materials are chosen for an over <span class="mono">30</span> year use life, and the grid is designed to withstand even a flood.</p>
+                  <p class="lede">FiberSprung stands behind the grid design with a <span class="mono">20</span> year warranty, and offers services to help customers relocate or resell their floors.</p>
+                </div>
+              </div>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- climbs over the pinned frame with the shadow edge -->
+    <div class="tech-detail">
+    <div class="wrap">
+
+
+      <!-- ─── the bend test — the centerpiece ─── -->
+      <div class="bend">
+
+        <!-- Intro left, illustration right, top-aligned; the four data
+             figures run full width beneath both. -->
+        <div class="bend__intro" data-reveal-stagger>
+          <div class="bend__head js-reveal">
+            <h3>We tested it against wood.</h3>
+            <p class="lede">To back up our math, we bend tested the wood of a wooden sprung floor against our Pro floor fiberglass, which was designed to exactly mimic its bend characteristics.</p>
+          </div>
+          <!-- SMALL INSET ONLY — generic diagram, never a section anchor.
+               Alt text added to copy.md 2026-07-25; copy.md remains the single
+               source of truth. It describes a generic three-point bend test and
+               deliberately does not claim to depict FiberSprung's own rig. -->
+          <figure class="bend__diagram js-reveal">
+            <img class="grade-technical"
+                 src="images/03-technology/tech-bend-test-diagram.jpg"
+                 width="560" height="209"
+                 loading="lazy" decoding="async"
+                 alt="Diagram of a three-point bend test: a specimen supported at both ends by pins, with a loading pin applying force at the centre.">
+          </figure>
+        </div>
+
+        <!-- Lattice texture at 3%, behind the mono data strip only. -->
+        <div class="bend__method js-reveal">
+          <dl class="specs specs--dark">
+            <div><dt class="k">Support beams tested</dt><dd class="v" data-count>10</dd></div>
+            <div><dt class="k">Independent suppliers</dt><dd class="v" data-count>2</dd></div>
+            <div><dt class="k">The wood typically used in sprung floors</dt><dd class="v">1×4 pine</dd></div>
+            <div><dt class="k">Test span</dt><dd class="v" data-count>3 ft</dd></div>
+          </dl>
+        </div>
+
+        <div class="bend__results" data-reveal-stagger>
+          <div class="result js-reveal">
+            <p class="result__label">Wood</p>
+            <p class="result__body">Deflected between <span class="mono">3mm</span> and <span class="mono">7mm</span> depending on the grain. Sometimes one side of the same beam bent more than the other.</p>
+          </div>
+          <div class="result result--fs js-reveal">
+            <p class="result__label">FiberSprung fiberglass</p>
+            <p class="result__body">Bent <span class="mono">3mm</span>. Every single time.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ─── why not foam ─── -->
+      <div class="callout callout--dark js-reveal">
+        <p>How often do you replace your kitchen sponge, or your sneakers? Why would you spend your money on sponge “springs” and expect decades of quality or longevity?</p>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 06 · PROCESS ═══════════════
+       Dark. Numbered 01–05 because this genuinely is a sequence, so it is an
+       <ol>: the order is conveyed semantically and the visible mono numerals
+       are aria-hidden to avoid a double announcement.
+
+       STEP-TO-FILE NUMBERING IS OFFSET ON PURPOSE. Filenames were numbered by
+       capture order, not step order:
+         step 03 (The fiberglass grid)  -> process-04-grid-columned.jpg
+         step 04 (The support surface)  -> process-03-panels-mid.jpg
+       This is correct per the mapping. Do not "fix" it.
+
+       Stagger runs INSIDE each step — head, body, figure — not between steps.
+       Stacked vertically, each step enters the viewport on its own scroll
+       position, so a delay between steps would only make later steps late. -->
+  <section class="band band--dark band--process" id="process" aria-labelledby="process-title">
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+        <p class="eyebrow js-reveal">How a floor gets made</p>
+        <h2 class="h2 js-reveal" id="process-title">Five steps, every time.</h2>
+      </div>
+
+      <ol class="steps">
+
+        <li class="step step--01" data-reveal-stagger>
+          <div class="step__head js-reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3>Design and planning</h3>
+          </div>
+          <p class="step__body js-reveal">All FiberSprung floor designs are based in Computer Aided Design. Floors are manufactured from the CAD files to quality tolerances defined by drawings, ensuring consistency across every part. Pre-planned layouts mean lean efficiency, less waste, and cost savings in time and materials.</p>
+
+          <!-- Secondary. Transparent PNG, light lines (luminance 238) straight
+               onto graphite (luminance 28) — no background fill, no grade.
+               477px native and hard-capped there; it is texture and a signal of
+               engineering rigour, not something anyone reads. -->
+          <figure class="step__figure step__layout js-reveal">
+            <img src="images/04-process/process-01-cad-layout.png"
+                 width="477" height="401"
+                 loading="lazy" decoding="async"
+                 alt="CAD layout drawing of a FiberSprung floor, showing dimensioned plywood panel placement and trim board positions">
+          </figure>
+
+          <!-- Primary image for this step. UNTREATED — no technical grade:
+               the grid is rendered in FiberSprung green and saturate(.15)
+               would strip it. cad-fixed (2026-07-26): graphite background
+               baked in — corners sampled (25,29,28) vs graphite (25,29,27),
+               so it sits on the dark section with no box. 903px native,
+               never displayed above. -->
+          <figure class="step__render js-reveal">
+            <img src="images/04-process/process-01-cad-render.jpg"
+                 width="903" height="196"
+                 loading="lazy" decoding="async"
+                 alt="3D CAD rendering of the FiberSprung Go floor showing the fiberglass grid beneath the plywood panels">
+          </figure>
+        </li>
+
+        <li class="step" data-reveal-stagger>
+          <div class="step__head js-reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3>Pre-assembly and delivery</h3>
+          </div>
+          <p class="step__body js-reveal">A <span class="mono">~6</span> week lead time begins once an order is placed. Fiberglass components are built and pre-assembled with FiberSprung fittings, and every piece of plywood and fiberglass joint is CNC machined for a consistently perfect fit. Every quotation includes installation — our own installers travel to your site.</p>
+          <figure class="step__figure js-reveal">
+            <img class="grade-technical"
+                 src="images/04-process/process-02-panels-down.jpg"
+                 width="1440" height="1080"
+                 loading="lazy" decoding="async"
+                 alt="Plywood support panels being installed beside the exposed grid in a Manhattan studio">
+          </figure>
+        </li>
+
+        <!-- step 03 -> process-04 file. Offset is intentional. -->
+        <li class="step" data-reveal-stagger>
+          <div class="step__head js-reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3>The fiberglass grid</h3>
+          </div>
+          <p class="step__body js-reveal">The basket-weave support structure goes down first. This is where the spring comes from, and where the <span class="mono">20</span> year warranty applies.</p>
+          <figure class="step__figure js-reveal">
+            <img class="grade-technical"
+                 src="images/04-process/process-04-grid-columned.jpg"
+                 width="1440" height="1800"
+                 loading="lazy" decoding="async"
+                 alt="Fiberglass grid installed in a columned university hall, Manhattan">
+          </figure>
+        </li>
+
+        <!-- step 04 -> process-03 file. Offset is intentional. -->
+        <li class="step" data-reveal-stagger>
+          <div class="step__head js-reveal">
+            <span class="step__num" aria-hidden="true">04</span>
+            <h3>The support surface</h3>
+          </div>
+          <p class="step__body js-reveal">A single layer of <span class="mono">3/4"</span> or <span class="mono">1"</span> plywood. Every joint is tongue-and-grooved, then fastened on both sides to a fiberglass plate — supporting the joint from beneath and producing a homogeneous-feeling surface. Single layer construction is a deliberate choice: it makes repair fast when a floor is damaged.</p>
+          <figure class="step__figure js-reveal">
+            <img class="grade-technical"
+                 src="images/04-process/process-03-panels-mid.jpg"
+                 width="1440" height="1080"
+                 loading="lazy" decoding="async"
+                 alt="FiberSprung installers fastening plywood panels over the fiberglass grid, Seattle Movement Arts Center">
+          </figure>
+        </li>
+
+        <li class="step" data-reveal-stagger>
+          <div class="step__head js-reveal">
+            <span class="step__num" aria-hidden="true">05</span>
+            <h3>The performance surface</h3>
+          </div>
+          <p class="step__body js-reveal">Typically marley for dance, with thin engineered hardwood and vinyl also available. Installing the surface is the finishing touch of our service.</p>
+          <figure class="step__figure js-reveal">
+            <img class="grade-technical"
+                 src="images/04-process/process-05-subfloor.jpg"
+                 width="1440" height="1440"
+                 loading="lazy" decoding="async"
+                 alt="Plywood panels laid over an existing floor during a Westmont, Illinois installation">
+          </figure>
+        </li>
+
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 07 · COMPARISON ═══════════════
+       Dark → Light. The argument is settled; we come back up to the surface.
+       The table is the content — no imagery in this section.
+
+       Hairlines only, no fills, mono for figures, generous row padding. The
+       FiberSprung column carries a single 2px green rule above it and nothing
+       else. Explicit ARIA roles are present because the narrow layout switches
+       the table to block display, which would otherwise strip table semantics
+       from the accessibility tree. -->
+  <section class="band" id="comparison" aria-labelledby="comparison-title">
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+        <div class="js-reveal">
+          <p class="eyebrow">Against the alternatives</p>
+          <h2 class="h2" id="comparison-title">Fiberglass, wood, and foam.</h2>
+        </div>
+
+        <div class="compare__wrap js-reveal">
+          <table class="compare" role="table">
+            <caption class="visually-hidden">FiberSprung compared with wood sprung and foam squish floors</caption>
+
+            <thead role="rowgroup">
+              <tr role="row">
+                <td class="compare__corner" role="cell"></td>
+                <th scope="col" role="columnheader" class="compare__fs">FiberSprung</th>
+                <th scope="col" role="columnheader">Wood Sprung</th>
+                <th scope="col" role="columnheader">Foam Squish</th>
+              </tr>
+            </thead>
+
+            <tbody role="rowgroup">
+              <tr role="row">
+                <th scope="row" role="rowheader">Subfloor material</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Fiberglass</td>
+                <td role="cell" data-label="Wood Sprung">Wood</td>
+                <td role="cell" data-label="Foam Squish">Foam</td>
+              </tr>
+              <tr role="row">
+                <th scope="row" role="rowheader">Subfloor life expectancy</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs num">30+ years</td>
+                <td role="cell" data-label="Wood Sprung" class="num">~15 yrs</td>
+                <td role="cell" data-label="Foam Squish" class="num">&lt;8 years</td>
+              </tr>
+              <tr role="row">
+                <th scope="row" role="rowheader">Surface material</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Plywood</td>
+                <td role="cell" data-label="Wood Sprung">Plywood</td>
+                <td role="cell" data-label="Foam Squish">Plywood or fiberboard</td>
+              </tr>
+              <tr role="row">
+                <th scope="row" role="rowheader">Relocation options</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Yes</td>
+                <td role="cell" data-label="Wood Sprung">No</td>
+                <td role="cell" data-label="Foam Squish">Depends on the design</td>
+              </tr>
+              <tr role="row">
+                <th scope="row" role="rowheader">Repair options</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Yes</td>
+                <td role="cell" data-label="Wood Sprung">Yes, but difficult</td>
+                <td role="cell" data-label="Foam Squish">Not to original performance</td>
+              </tr>
+
+              <!-- copy.md: "the single most persuasive line on the entire site."
+                   Emphasis by weight, size and row space only — no fill and no
+                   colour, since the one green mark in this table is reserved
+                   for the FiberSprung column rule. -->
+              <tr role="row" class="is-key">
+                <th scope="row" role="rowheader">Water damage options</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Surface replacement</td>
+                <td role="cell" data-label="Wood Sprung">Entire floor replacement</td>
+                <td role="cell" data-label="Foam Squish">Entire floor replacement</td>
+              </tr>
+
+              <tr role="row">
+                <th scope="row" role="rowheader">Resale options</th>
+                <td role="cell" data-label="FiberSprung" class="compare__fs">Yes</td>
+                <td role="cell" data-label="Wood Sprung">No</td>
+                <td role="cell" data-label="Foam Squish">Depends on design/age</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 08 · RANGE ═══════════════
+       Light, alternating band. Spec-driven and typographic: Pro, Light, One
+       and Go carry NO imagery by instruction. The two React swatches are the
+       only images permitted in this section and belong to the React entry.
+
+       React is quote-only. The $910.80 roll price is deliberately not
+       published — showing a number on one product while every other product
+       is quote-only reads as inconsistent and anchors a figure before the
+       conversation starts. "Request pricing" is the call. -->
+  <section class="band band--alt" id="range" aria-labelledby="range-title">
+    <div class="wrap">
+
+      <!-- COPY EDIT — RF Digital correction, pending Micah's approval.
+           ORIGINAL (copy.md): "Five floors"
+           The section lists six entries. React is a surface and Out is an
+           upgrade, so "five floors" may be a deliberate count of floors
+           only — but it invites a miscount, and it breaks if the range is
+           ever recategorised. "The range" is accurate under any grouping and
+           echoes the H2 beneath it. See copy-changes.md. -->
+      <div data-reveal-stagger>
+        <p class="eyebrow js-reveal">The range</p>
+        <h2 class="h2 js-reveal" id="range-title">One system, built to the room.</h2>
+      </div>
+
+      <ul class="range">
+
+        <li class="range__item" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS PRO</span> <span class="range__tag">— the best</span></h3>
+          <div class="range__body js-reveal">
+            <p>Our tightest fiberglass grid. More contact pads with the plywood surface means the least reverberation — a dancer working beside others feels less movement from the floor around them. Each impact is distributed over more pads, giving the most consistent spring feel of any floor we build.</p>
+            <p class="range__users">Pace University, Kanyok Arts Initiative, Bayou City Ballet, and others</p>
+            <!-- COPY ADDITION — "Request pricing" extended from the React entry
+                 to all five floors, RF Digital 2026-07-25. Logged. -->
+            <p class="range__pricing"><a class="pricing-link" href="#contact">Request pricing <span class="pricing-link__arrow" aria-hidden="true">→</span></a></p>
+          </div>
+          <ul class="range__specs js-reveal">
+            <li><span class="range__k">Height</span> <span class="mono">3.75"</span> · <span class="mono">4"</span> with an upgraded surface</li>
+            <li><span class="range__k">Install</span> <span class="mono">2.5</span> days per <span class="mono">1000</span> sqft</li>
+          </ul>
+        </li>
+
+        <li class="range__item" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS LIGHT</span> <span class="range__tag">— bang for your buck</span></h3>
+          <div class="range__body js-reveal">
+            <p>Engineered to almost identical bend characteristics as the Pro, using larger fiberglass tubes and a looser lattice. Fewer tubes make it faster to install and less expensive. In performance, it is our softest floor.</p>
+            <p class="range__users">SUNY Purchase College, Hunter Dance Center, Newnan Theater Company, and others</p>
+            <!-- COPY ADDITION — "Request pricing" extended from the React entry
+                 to all five floors, RF Digital 2026-07-25. Logged. -->
+            <p class="range__pricing"><a class="pricing-link" href="#contact">Request pricing <span class="pricing-link__arrow" aria-hidden="true">→</span></a></p>
+          </div>
+          <ul class="range__specs js-reveal">
+            <li><span class="range__k">Height</span> <span class="mono">4.5"</span> · some height customization possible</li>
+            <li><span class="range__k">Install</span> <span class="mono">2</span> days per <span class="mono">1000</span> sqft</li>
+          </ul>
+        </li>
+
+        <li class="range__item" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS ONE</span> <span class="range__tag">— budget brilliance</span></h3>
+          <div class="range__body js-reveal">
+            <p>A single layer floor built for budget conscious customers, typically home studios. Comparable in softness to the Pro, with spring distributed over fewer pads. Transported in pre-assembled panels fastened together on site. Same superior materials, same lifetime advantages, smaller number.</p>
+            <p class="range__users">Tested in home studios nationwide</p>
+            <!-- COPY ADDITION — "Request pricing" extended from the React entry
+                 to all five floors, RF Digital 2026-07-25. Logged. -->
+            <p class="range__pricing"><a class="pricing-link" href="#contact">Request pricing <span class="pricing-link__arrow" aria-hidden="true">→</span></a></p>
+          </div>
+          <ul class="range__specs js-reveal">
+            <li><span class="range__k">Height</span> <span class="mono">2.50"</span></li>
+            <li><span class="range__k">Install</span> <span class="mono">~1</span> day per <span class="mono">1000</span> sqft</li>
+          </ul>
+        </li>
+
+        <li class="range__item" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS GO</span> <span class="range__tag">— on the go</span></h3>
+          <div class="range__body js-reveal">
+            <p>Built for maximum portability. Transported in <span class="mono">4'×4'</span> panels that mechanically lock together with a single <span class="mono">8mm</span> hex wrench, which we provide. With a team of four, <span class="mono">800</span> square feet goes down in two to three hours. A semi-permanent basket-weave floor of the same size would take about two days.</p>
+            <p class="range__users">NBC Universal, Traverse City Dance Project, home studios nationwide</p>
+            <!-- COPY ADDITION — "Request pricing" extended from the React entry
+                 to all five floors, RF Digital 2026-07-25. Logged. -->
+            <p class="range__pricing"><a class="pricing-link" href="#contact">Request pricing <span class="pricing-link__arrow" aria-hidden="true">→</span></a></p>
+          </div>
+          <ul class="range__specs js-reveal">
+            <li><span class="range__k">Height</span> <span class="mono">2.50"</span> · <span class="mono">3.25"</span> stacked, panels nest</li>
+            <li><span class="range__k">Panel weight</span> <span class="mono">45 lbs</span> per <span class="mono">4'×4'</span></li>
+            <li><span class="range__k">Install</span> <span class="mono">3</span> hours per <span class="mono">800</span> sqft</li>
+          </ul>
+        </li>
+
+        <!-- The only images in this section. Both belong to React. -->
+        <li class="range__item range__item--react" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS REACT</span> <span class="range__tag">— composite marley surface</span></h3>
+          <div class="range__body js-reveal">
+            <p>An all-purpose composite marley floor surface for performance arts and fitness: ballet, pointe, contemporary, modern, jazz, street, hip-hop, aerobics, and pilates. React gives a consistent surface, so the floor feels the same across an entire room or stage.</p>
+            <p>The React surface is a three layer composite. A vinyl performance surface, stabilized by a fiberglass layer for reinforcement and dimensional stability, backed with closed cell foam which conforms and provides the desired consistent reaction over the entire surface.</p>
+
+            <!-- Moved from section 05, 2026-07-25: it illustrates the React
+                 surface, not the grid. Grade switched technical → payoff with
+                 the section. BRIEF mapping updated. -->
+            <figure class="figure range__cutaway js-reveal">
+              <img class="grade-payoff"
+                   src="images/05b-react/react-cutaway.jpg"
+                   width="945" height="931"
+                   loading="lazy" decoding="async"
+                   alt="Cutaway of the FiberSprung React surface showing its three layers: vinyl performance surface, fiberglass reinforcement, and closed cell foam backing">
+            </figure>
+            <p class="range__pricing"><a class="pricing-link" href="#contact">Request pricing <span class="pricing-link__arrow" aria-hidden="true">→</span></a></p>
+          </div>
+          <ul class="range__specs js-reveal">
+            <li><span class="range__k">Colours:</span> black, grey</li>
+            <li><span class="range__k">Roll width</span> <span class="mono">5.9 ft</span> (<span class="mono">1.8m</span>)</li>
+            <li><span class="range__k">Bulk roll lengths</span> <span class="mono">49 ft</span>, <span class="mono">65 ft</span></li>
+            <li><span class="range__k">Thickness</span> <span class="mono">0.138in</span> (<span class="mono">3.5mm</span>)</li>
+          </ul>
+
+          <div class="range__swatches js-reveal">
+            <figure class="swatch">
+              <img class="grade-payoff"
+                   src="images/05b-react/react-swatch-grey.jpg"
+                   width="943" height="926"
+                   loading="lazy" decoding="async"
+                   alt="FiberSprung React marley surface in grey, shown on a maple floor">
+            </figure>
+            <figure class="swatch">
+              <img class="grade-payoff"
+                   src="images/05b-react/react-swatch-black.jpg"
+                   width="931" height="915"
+                   loading="lazy" decoding="async"
+                   alt="FiberSprung React marley surface in black, shown on a maple floor">
+            </figure>
+          </div>
+        </li>
+
+        <li class="range__item range__item--soon" data-reveal-stagger>
+          <h3 class="range__head js-reveal"><span class="range__name">FS OUT</span> <span class="range__tag">— coming soon</span></h3>
+          <div class="range__body js-reveal">
+            <p>A waterproof upgrade available to all FiberSprung floors, making them usable and storable outdoors, rain or shine.</p>
+            <p class="range__cta"><a class="btn btn--ghost" href="#contact">Contact us if you're interested in this product</a></p>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 09 · ORIGIN ═══════════════
+       Light. One image, quiet and contained — the story carries the section.
+       The 2017 hurricane detail is the water-resistance argument told as a
+       story rather than claimed, and stays in full.
+
+       The team's third descriptors are load-bearing. "Palm Tree Climber" and
+       "Fisherman" are the only warmth on the entire site. Do not
+       professionalise them, and do not uppercase them — sentence case is
+       part of why they read as human. -->
+  <section class="band" id="origin" aria-labelledby="origin-title">
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+      <p class="eyebrow js-reveal">Our story</p>
+
+      <div class="origin">
+        <h2 class="h2 origin__head js-reveal" id="origin-title">It started with a sprinkler.</h2>
+
+        <div class="origin__body js-reveal">
+          <p>The idea for FiberSprung came when Spencer Hering lost a wood-sprung dance floor to a sprinkler system malfunction. Afterwards, Hurricanes Harvey, Irma, and Maria destroyed a plethora of sprung floors in Texas, Florida, and Puerto Rico in the summer of <span class="mono">2017</span>, highlighting the need for a flood-proof flooring system. Spencer had built dance floors before, and got to thinking there had to be a better way.</p>
+          <p>On his final day as a professional dancer, Spencer brought the idea to product designer Micah Reyes, whose background is composites design through aerospace and yacht design. They quickly realized the potential of composites like fiberglass to increase lifetime, improve consistency, and improve the quality of sprung floors. That is when research and development for FiberSprung began.</p>
+          <p>FiberSprung uses high performance, long lasting composites in place of the wood inside basket-weave sprung floors. Using structural engineering, our floors match the bend characteristics of a traditional sprung floor — and we developed and patented an elastomer and aluminum fitting method that makes the fiberglass lattice modular and reusable.</p>
+        </div>
+
+        <figure class="figure origin__figure js-reveal">
+          <img class="grade-payoff"
+               src="images/05-finished/finished-plywood-mirror.jpg"
+               width="1440" height="1440"
+               loading="lazy" decoding="async"
+               alt="Finished floor and mirrored wall, SUNY Purchase College">
+        </figure>
+      </div>
+      </div>
+
+      <!-- Revealed as one block. Five people would exceed the four-item
+           stagger cap, and they arrive on screen together. -->
+      <div class="team js-reveal">
+        <dl class="team__grid">
+          <div class="team__person">
+            <!-- alt="" is deliberate: the name is the adjacent text. -->
+            <dt><img class="team__photo grade-technical" src="images/08-team/team-spencer.jpg" width="177" height="178" loading="lazy" decoding="async" alt=""><span class="team__name">Spencer</span></dt>
+            <dd>Inventor · Ballet Master · Artistic Director</dd>
+          </div>
+          <div class="team__person">
+            <!-- alt="" is deliberate: the name is the adjacent text. -->
+            <dt><img class="team__photo grade-technical" src="images/08-team/team-micah.jpg" width="173" height="178" loading="lazy" decoding="async" alt=""><span class="team__name">Micah</span></dt>
+            <dd>Design Engineer · Yacht Racer · Palm Tree Climber</dd>
+          </div>
+          <div class="team__person">
+            <!-- alt="" is deliberate: the name is the adjacent text. -->
+            <dt><img class="team__photo grade-technical" src="images/08-team/team-zach.jpg" width="172" height="178" loading="lazy" decoding="async" alt=""><span class="team__name">Zach</span></dt>
+            <dd>Serial Entrepreneur · Marketer · Fisherman</dd>
+          </div>
+          <div class="team__person">
+            <!-- alt="" is deliberate: the name is the adjacent text. -->
+            <dt><img class="team__photo grade-technical" src="images/08-team/team-chase.jpg" width="172" height="178" loading="lazy" decoding="async" alt=""><span class="team__name">Chase</span></dt>
+            <dd>Composites Expert · Carpenter · Yacht Racer</dd>
+          </div>
+          <div class="team__person">
+            <!-- alt="" is deliberate: the name is the adjacent text. -->
+            <dt><img class="team__photo grade-technical" src="images/08-team/team-andrea.jpg" width="176" height="178" loading="lazy" decoding="async" alt=""><span class="team__name">Andrea</span></dt>
+            <dd>Administrator · Teacher/Choreographer · Jewelry Designer</dd>
+          </div>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 10 · PAYOFF ═══════════════
+       Light, full colour. The emotional landing: you have come back up from
+       under the floor to the room where the work happens. Payoff grade on
+       every image.
+
+       Two of these are RIGHTS PENDING and both are small files — 413px and
+       398px. They are held to contained sizes by grid span AND by a hard
+       max-width at native resolution, so neither can be enlarged by a later
+       layout change. Each is wrapped so it lifts out in one edit. -->
+  <section class="band band--alt" id="payoff" aria-labelledby="payoff-title">
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+        <div class="js-reveal">
+          <p class="eyebrow">Where these floors live</p>
+          <h2 class="h2" id="payoff-title">Rooms that are ready.</h2>
+        </div>
+        <p class="lede js-reveal">Universities, professional companies, theaters, touring productions, and home studios. Every FiberSprung floor is installed by our own team, and designed to move with you if the room ever changes.</p>
+      </div>
+
+      <!-- Revealed as one block: five figures would exceed the four-item
+           stagger cap, and they arrive together. -->
+      <div class="payoff__grid js-reveal">
+
+        <figure class="figure p--dark">
+          <img class="grade-payoff"
+               src="images/05-finished/finished-dark-studio.jpg"
+               width="960" height="952"
+               loading="lazy" decoding="async"
+               alt="Finished FiberSprung floor in a modern dance studio, University of St Thomas">
+        </figure>
+
+        <figure class="figure p--simple">
+          <img class="grade-payoff"
+               src="images/05-finished/finished-simple-studio.jpg"
+               width="1440" height="1440"
+               loading="lazy" decoding="async"
+               alt="Completed FiberSprung floor with barre and mirror, Phelan, California">
+        </figure>
+
+        <figure class="figure p--edge">
+          <img class="grade-payoff"
+               src="images/05-finished/finished-edge-detail.jpg"
+               width="960" height="950"
+               loading="lazy" decoding="async"
+               alt="Edge view of a completed FiberSprung floor showing the build-up above the existing surface">
+        </figure>
+
+        <!-- RIGHTS-PENDING: swap or remove if usage not confirmed -->
+        <figure class="figure p--class">
+          <img class="grade-payoff"
+               src="images/06-people/people-class-in-motion.jpg"
+               width="413" height="413"
+               loading="lazy" decoding="async"
+               alt="Dancers rehearsing on a FiberSprung floor">
+        </figure>
+        <!-- /RIGHTS-PENDING -->
+
+        <!-- RIGHTS-PENDING: swap or remove if usage not confirmed -->
+        <figure class="figure p--event">
+          <img class="grade-payoff"
+               src="images/06-people/people-portable-event.jpg"
+               width="398" height="398"
+               loading="lazy" decoding="async"
+               alt="Dancers performing on a portable FiberSprung floor at an outdoor event">
+        </figure>
+        <!-- /RIGHTS-PENDING -->
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ 11 · CONTACT ═══════════════
+       Light. Five fields plus contact, both phone numbers, Moasure, financing.
+       No chat widget, no newsletter, no cookie banner.
+
+       The form has no action — this is a static demo and there is no endpoint
+       to post to. Wire it before this ships. -->
+  <section class="band" id="contact" aria-labelledby="contact-title">
+
+    <div class="wrap">
+
+      <div data-reveal-stagger>
+        <div class="js-reveal">
+          <p class="eyebrow">Start a conversation</p>
+          <h2 class="h2" id="contact-title">Tell us about your space.</h2>
+        </div>
+        <p class="lede js-reveal">Every quotation includes installation. Send us the room and we'll come back with a layout, a bill of materials, and a number.</p>
+      </div>
+
+      <div class="contact">
+
+        <form class="quote js-reveal">
+          <div class="field">
+            <label for="space-type">Space type</label>
+            <select id="space-type" name="space-type">
+              <!-- "Select one" is interface furniture, not copy.md text; logged. -->
+              <option value="" selected disabled>Select one</option>
+              <option>studio</option>
+              <option>theater</option>
+              <option>university</option>
+              <option>fitness</option>
+              <option>other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="sqft">Approximate sqft</label>
+            <input type="number" id="sqft" name="sqft" inputmode="numeric" min="1">
+          </div>
+
+          <div class="field">
+            <label for="timeline">Timeline</label>
+            <select id="timeline" name="timeline">
+              <option value="" selected disabled>Select one</option>
+              <option>within 3 months</option>
+              <option>3–6 months</option>
+              <option>6+ months</option>
+              <option>exploring</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+
+          <div class="quote__submit">
+            <button class="btn" type="submit">Request a quote</button>
+          </div>
+        </form>
+
+        <div class="contact__side js-reveal">
+          <div class="aside">
+            <h3>Need help measuring your floor?</h3>
+            <p>We'll send you our Moasure device and instructions so you can digitally measure your space yourself.</p>
+          </div>
+
+          <div class="aside">
+            <p>Financing available through Full Circle Finance.</p>
+          </div>
+
+          <div class="contact__direct">
+            <a class="contact-pill" href="tel:+14018555520">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>401-855-5520</span>
+            </a>
+            <a class="contact-pill" href="tel:+19095530729">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>909-553-0729</span>
+            </a>
+            <a class="contact-pill" href="mailto:info@fibersprung.com">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              <span>info@fibersprung.com</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="site-footer__patents">
+      FiberSprung technology protected by patents:<br>
+      <span class="mono">US10329777</span> · <span class="mono">US10731359</span> · <span class="mono">US11047138</span> · <span class="mono">US11655639</span> · <span class="mono">EP3966404</span>
+    </p>
+
+    <p class="site-footer__copy"><span class="mono">© 2026</span> FiberSprung</p>
+<p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4A524E;margin:10px 0 0;">Site by <a href="https://rfdigitalagency.com" target="_blank" rel="noopener" style="color:#496F2A;text-decoration:none;border-bottom:1px solid rgba(73,111,42,.35);">RF Digital</a></p>
+  </div>
+</footer>
+
+<!-- Floating chat action. Fixed, visible at every scroll position, above all
+     content. Anchors to the form pending a real chat integration. On mobile it
+     collapses to a circular icon button; the label is hidden, so the
+     aria-label carries the name. -->
+<a class="chat-fab" href="#contact" aria-label="Let's Chat">
+  <svg class="chat-fab__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+  <span class="chat-fab__label">Let's Chat</span>
+</a>
+
+<script src="script.js" onerror="window.fsFailOpenGuard && window.fsFailOpenGuard()"></script>
+</body>
+</html>

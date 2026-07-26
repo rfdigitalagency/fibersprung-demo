@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FiberSprung — Design System</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ————— SURFACE (above the floor) ————— */
+  --concrete:      #EAECE9;   /* page base. cool, subfloor-derived. never cream. */
+  --concrete-deep: #DEE1DD;   /* alternating band */
+  --paper:         #FAFBFA;   /* cards, raised surfaces */
+  --line:          #CDD2CC;   /* hairlines on light */
+
+  /* ————— SUBSTRUCTURE (below the floor) ————— */
+  --graphite:      #191D1B;   /* dark panel base — the lattice colour */
+  --graphite-deep: #111413;   /* deepest panel */
+  --line-dark:     #2E3431;   /* hairlines on dark */
+
+  /* ————— INK ————— */
+  --ink:           #131614;
+  --ink-2:         #4A524E;   /* secondary text on light */
+  --ink-inv:       #EDEFEC;   /* text on dark */
+  --ink-inv-2:     #9BA49F;   /* secondary text on dark */
+
+  /* ————— MATERIAL ACCENTS (from the photographs) ————— */
+  --birch:         #E3D6BE;   /* plywood panels */
+  --maple:         #C9A87C;   /* image 14 floor */
+
+  /* ————— SIGNAL ————— */
+  --green:         #70AB41;   /* BRAND. sampled from logo. hue 93deg, sat 45%. */
+  --green-deep:    #486D29;   /* v1.2. 5.06:1 on concrete, 4.56:1 on concrete-deep. AA on both light bases. */
+  --green-glow:    #7EBC4E;   /* 7.45:1 on graphite. AAA on dark. */
+
+  /* ————— TYPE ————— */
+  --display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --body:    "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --data:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ————— SPACE (8px base) ————— */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px; --s11:192px;
+
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --radius: 3px;   /* near-square. engineered, not soft. */
+
+  /* ————— MOTION ————— */
+  --micro: 180ms;
+  --std:   400ms;
+  --enter: 720ms;
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --ease-scrub: cubic-bezier(.65,0,.35,1);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--concrete); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--display); font-weight:700; letter-spacing:-.025em; line-height:1.02; margin:0}
+code,.mono{font-family:var(--data)}
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 var(--gutter)}
+.band{padding:var(--s9) 0; border-top:1px solid var(--line)}
+.band--dark{background:var(--graphite); color:var(--ink-inv); border-top:none}
+.band--dark h2,.band--dark h3{color:var(--ink-inv)}
+
+.eyebrow{
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green-deep);
+  display:flex; align-items:center; gap:var(--s3); margin:0 0 var(--s5);
+}
+.band--dark .eyebrow{color:var(--green-glow)}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--line)}
+.band--dark .eyebrow::after{background:var(--line-dark)}
+
+.lede{max-width:var(--measure); color:var(--ink-2); font-size:1.05rem; margin:var(--s4) 0 0}
+.band--dark .lede{color:var(--ink-inv-2)}
+
+/* ——— masthead ——— */
+.mast{padding:var(--s10) 0 var(--s9)}
+.mast h1{font-size:clamp(2.6rem,7vw,5.2rem)}
+.mast .sub{font-family:var(--data); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); margin-bottom:var(--s5)}
+
+/* ——— the signature: lattice rule ——— */
+.lattice{display:block; width:100%; height:22px; margin:var(--s6) 0}
+
+/* ——— swatches ——— */
+.sw-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:var(--s4); margin-top:var(--s6)}
+.sw{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--paper)}
+.sw i{display:block; height:82px}
+.sw b{display:block; font-size:12px; font-weight:600; padding:var(--s3) var(--s3) 2px}
+.sw span{display:block; font-family:var(--data); font-size:11px; color:var(--ink-2); padding:0 var(--s3) var(--s3)}
+
+/* ——— type specimens ——— */
+.spec{border-top:1px solid var(--line); padding:var(--s5) 0; display:grid; grid-template-columns:150px 1fr; gap:var(--s5)}
+.spec dt{font-family:var(--data); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2)}
+.spec dd{margin:0}
+
+.scale-item{margin-bottom:var(--s5)}
+.scale-item .tag{font-family:var(--data); font-size:10px; letter-spacing:.14em; color:var(--ink-2); text-transform:uppercase; display:block; margin-bottom:6px}
+
+/* ——— data table (used for the comparison + specs) ——— */
+table{width:100%; border-collapse:collapse; margin-top:var(--s5); font-size:14px}
+th,td{text-align:left; padding:var(--s3) var(--s4); border-bottom:1px solid var(--line)}
+th{font-family:var(--data); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); font-weight:500}
+td.num{font-family:var(--data); font-variant-numeric:tabular-nums}
+tr td:first-child{font-weight:500}
+
+/* ——— buttons ——— */
+.btn{
+  display:inline-flex; align-items:center; gap:var(--s3);
+  font-family:var(--body); font-weight:600; font-size:14px;
+  padding:14px 22px; border-radius:var(--radius); border:1px solid var(--ink);
+  background:var(--ink); color:var(--concrete); text-decoration:none;
+  transition:transform var(--micro) var(--ease-out), background var(--micro) linear;
+}
+.btn:hover{transform:translateY(-2px); background:#000}
+.btn--ghost{background:transparent; color:var(--ink)}
+.btn--ghost:hover{background:var(--ink); color:var(--concrete)}
+.btn__dot{width:6px; height:6px; background:var(--green); border-radius:50%}
+
+/* On-dark variants — for actions sitting over a photograph or a dark panel.
+   Same geometry, padding, weight and timing as the light pair. Only the edge
+   and the ghost fill change. Added v1.1. */
+.btn--on-dark{border-color:rgba(237,239,236,.28)}
+.btn--ghost-dark{background:transparent; color:var(--ink-inv); border-color:rgba(237,239,236,.42)}
+.btn--ghost-dark:hover{background:var(--ink-inv); color:var(--ink); border-color:var(--ink-inv)}
+.btn-strip-dark{background:var(--graphite); padding:var(--s5); border-radius:var(--radius); display:flex; gap:var(--s4); flex-wrap:wrap; margin-top:var(--s4)}
+
+/* ——— spec block: the mono-data treatment ——— */
+.specs{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:var(--s6)}
+.specs > div{background:var(--paper); padding:var(--s5)}
+.specs .v{font-family:var(--data); font-size:clamp(1.5rem,3vw,2.1rem); font-weight:500; letter-spacing:-.02em; display:block}
+.specs .k{font-family:var(--data); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); margin-top:6px; display:block}
+
+/* ——— recognition band ——— */
+.recog{display:flex; flex-wrap:wrap; gap:var(--s4) var(--s7); align-items:center; margin-top:var(--s5)}
+.recog span{font-family:var(--display); font-weight:500; font-size:15px; color:var(--ink-2); letter-spacing:.01em}
+
+/* ——— notes / rules list ——— */
+.rules{margin:var(--s5) 0 0; padding:0; list-style:none; max-width:var(--measure)}
+.rules li{position:relative; padding-left:var(--s5); margin-bottom:var(--s3); color:var(--ink-2)}
+.rules li::before{content:""; position:absolute; left:0; top:.72em; width:8px; height:2px; background:var(--green)}
+.band--dark .rules li{color:var(--ink-inv-2)}
+
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--s7); margin-top:var(--s6)}
+
+.callout{border-left:2px solid var(--green); padding:var(--s2) 0 var(--s2) var(--s5); margin:var(--s6) 0; max-width:var(--measure)}
+.callout p{margin:0; color:var(--ink-2)}
+
+.plan{border:1px solid var(--line); border-radius:var(--radius); background:var(--paper); padding:var(--s5); margin-bottom:var(--s4)}
+.plan h4{font-size:1.05rem; margin-bottom:6px}
+.plan .role{font-family:var(--data); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--green-deep); display:block; margin-bottom:var(--s3)}
+.plan p{margin:0 0 var(--s3); color:var(--ink-2); font-size:14px}
+.plan .asset{font-family:var(--data); font-size:11px; color:var(--ink); background:var(--concrete-deep); padding:3px 8px; border-radius:2px; display:inline-block; margin:2px 4px 2px 0}
+
+@media (max-width:640px){
+  .spec{grid-template-columns:1fr; gap:var(--s2)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap mast">
+  <p class="sub">RF Digital · Design System · v1.4</p>
+  <h1>FiberSprung</h1>
+  <p class="lede">A patented fiberglass sprung floor sold to universities, professional companies, and theaters. This system exists to make a technical product look inevitable rather than merely competent.</p>
+
+  <svg class="lattice" viewBox="0 0 1200 22" preserveAspectRatio="none" aria-hidden="true">
+    <rect x="0" y="10" width="1200" height="2" fill="#191D1B"/>
+    <g fill="#191D1B">
+      <rect x="80"  y="4" width="7" height="14"/><rect x="280" y="4" width="7" height="14"/>
+      <rect x="480" y="4" width="7" height="14"/><rect x="680" y="4" width="7" height="14"/>
+      <rect x="880" y="4" width="7" height="14"/><rect x="1080" y="4" width="7" height="14"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ————————————————— THE IDEA ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The organizing idea</p>
+    <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem); max-width:22ch">Light is the surface. Dark is the structure underneath.</h2>
+    <p class="lede">Every light section of this site is the floor you stand on: finished, calm, ready. Every dark section is what's beneath it: the lattice, the engineering, the reason it lasts thirty years. Colour is not decoration here, it tells the reader where they are in the product.</p>
+
+    <div class="callout">
+      <p><strong>Why not a dark site with a green accent.</strong> That is the obvious answer to this logo, and it is the wrong one. It buries a product whose whole promise is lightness and longevity, and it looks like every other engineered-materials site. The palette below is drawn from the materials in FiberSprung's own installation photographs — graphite lattice, concrete subfloor, birch plywood, maple — not from the logo. Green is a signal, used perhaps six times on the entire page.</p>
+    </div>
+
+    <div class="cols">
+      <div>
+        <h3 style="font-size:1.1rem">Feel</h3>
+        <ul class="rules">
+          <li>Engineered, not clinical. Confident, not loud.</li>
+          <li>Spacious. Air is the primary luxury signal.</li>
+          <li>Precise motion. Slow, eased, never bouncy.</li>
+          <li>The photography carries the beauty. The interface stays quiet.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.1rem">Never</h3>
+        <ul class="rules">
+          <li>Green floods, green gradients, green buttons everywhere.</li>
+          <li>Stock imagery in any technical section.</li>
+          <li>Rounded, friendly, soft. This is a manufacturer.</li>
+          <li>Decoration that isn't derived from the product.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— COLOUR ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Colour</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Drawn from the floor, not the logo</h2>
+
+    <p class="lede" style="margin-top:var(--s5)"><strong>Surface</strong> — the light world. Cool concrete, never cream.</p>
+    <div class="sw-grid">
+      <div class="sw"><i style="background:#EAECE9"></i><b>Concrete</b><span>#EAECE9 · page base</span></div>
+      <div class="sw"><i style="background:#DEE1DD"></i><b>Concrete deep</b><span>#DEE1DD · alt band</span></div>
+      <div class="sw"><i style="background:#FAFBFA"></i><b>Paper</b><span>#FAFBFA · cards</span></div>
+      <div class="sw"><i style="background:#CDD2CC"></i><b>Line</b><span>#CDD2CC · hairline</span></div>
+    </div>
+
+    <p class="lede" style="margin-top:var(--s7)"><strong>Substructure</strong> — the dark world. This is lattice black.</p>
+    <div class="sw-grid">
+      <div class="sw"><i style="background:#191D1B"></i><b>Graphite</b><span>#191D1B · dark panel</span></div>
+      <div class="sw"><i style="background:#111413"></i><b>Graphite deep</b><span>#111413 · deepest</span></div>
+      <div class="sw"><i style="background:#2E3431"></i><b>Line dark</b><span>#2E3431 · hairline</span></div>
+      <div class="sw"><i style="background:#131614"></i><b>Ink</b><span>#131614 · body text</span></div>
+    </div>
+
+    <p class="lede" style="margin-top:var(--s7)"><strong>Material</strong> — sampled from the photographs. Use sparingly, mostly as photographic warmth rather than UI colour.</p>
+    <div class="sw-grid">
+      <div class="sw"><i style="background:#E3D6BE"></i><b>Birch</b><span>#E3D6BE · plywood</span></div>
+      <div class="sw"><i style="background:#C9A87C"></i><b>Maple</b><span>#C9A87C · hero floor</span></div>
+    </div>
+
+    <p class="lede" style="margin-top:var(--s7)"><strong>Signal</strong> — the brand green. Bright green is not legible as text on light; use the deep value for type and reserve the bright value for marks, rules, dots, and on-dark use.</p>
+    <div class="sw-grid">
+      <div class="sw"><i style="background:#70AB41"></i><b>Green</b><span>#70AB41 · marks only</span></div>
+      <div class="sw"><i style="background:#486D29"></i><b>Green deep</b><span>#486D29 · 4.56:1 on both</span></div>
+      <div class="sw"><i style="background:#7EBC4E"></i><b>Green glow</b><span>#7EBC4E · 7.45:1 on dark</span></div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Sampled and locked.</strong> #70AB41, taken from the logo field — hue 93&deg;, saturation 45%. It is far more olive and far less acid than it reads on the trade-show banner, which is fortunate: it behaves like a considered brand colour rather than a highlighter. At 2.33:1 on the light base it cannot carry text, so <code>--green-deep</code> (#486D29, 5.06:1 on concrete and 4.56:1 on concrete-deep) does all typographic work on light and <code>--green-glow</code> (#7EBC4E, 7.45:1) does it on dark. The brand value itself is reserved for marks, rules, and dots.</p><p style="margin-top:var(--s4)"><strong>v1.2 — green-deep darkened.</strong> It was #496F2A, measured at 4.92:1 against <code>--concrete</code>. That figure only ever held on the page base: against <code>--concrete-deep</code>, the alternating band, the same value gives <strong>4.43:1</strong> and fails the 4.5 floor. Nothing had used the alternating band as a background for green text until sections 08 and 11 did. #486D29 holds the sampled 93&deg; hue and the saturation, drops lightness about two percent, and clears AA on <em>every</em> light surface in the system: 5.06:1 on concrete, 4.56:1 on concrete-deep, 5.79:1 on paper. The locked brand value #70AB41 is untouched — <code>--green-deep</code> is a derived working colour, not the sampled one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— TYPE ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Typography</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Three voices, strictly separated</h2>
+
+    <dl class="spec" style="margin-top:var(--s6)">
+      <dt>Display</dt>
+      <dd>
+        <div style="font-family:var(--display); font-weight:700; font-size:clamp(1.8rem,4vw,3rem); letter-spacing:-.03em; line-height:1.02">Your Forever Floor</div>
+        <p style="color:var(--ink-2); font-size:14px; margin:var(--s3) 0 0">Space Grotesk 700 / 500 (v1.3; was Cabinet Grotesk 800/700 — Space Grotesk tops out at 700). Drawn, slightly technical, confident. Headlines only. Tight tracking at large sizes (−0.03em), loosening toward −0.01em by 1.5rem.</p>
+      </dd>
+    </dl>
+
+    <dl class="spec">
+      <dt>Body</dt>
+      <dd>
+        <div style="font-family:var(--body); font-size:1.05rem; max-width:var(--measure)">FiberSprung floors are consistent from day one to day three thousand and one. The fiberglass within a FiberSprung floor is designed for bend and is nowhere near its ultimate failure load.</div>
+        <p style="color:var(--ink-2); font-size:14px; margin:var(--s3) 0 0">Switzer 400 / 500 / 600. Line height 1.6, measure capped at 68 characters. Never justified.</p>
+      </dd>
+    </dl>
+
+    <dl class="spec">
+      <dt>Data</dt>
+      <dd>
+        <div class="mono" style="font-size:1.4rem; font-weight:500">3.75" · 2.5 days · 30+ yrs · 3mm</div>
+        <p style="color:var(--ink-2); font-size:14px; margin:var(--s3) 0 0">JetBrains Mono 400 / 500. <strong>Every number on this site is mono.</strong> Heights, install times, spans, warranties, years, deflection. This is the single strongest cue that the company measures things, and it comes from their own world — CAD files, bills of material, tolerance drawings. Also used for eyebrows and labels at 11px / 0.2em tracking.</p>
+      </dd>
+    </dl>
+
+    <h3 style="font-size:1.1rem; margin-top:var(--s8)">Scale</h3>
+    <div style="margin-top:var(--s5)">
+      <div class="scale-item"><span class="tag">Display XL — hero only — clamp(2.8rem, 8vw, 6rem)</span><span style="font-family:var(--display); font-weight:700; font-size:clamp(2.2rem,6vw,4rem); letter-spacing:-.035em">Your Forever Floor</span></div>
+      <div class="scale-item"><span class="tag">H2 — section head — clamp(1.9rem, 4vw, 3.25rem) · cap raised v1.4</span><span style="font-family:var(--display); font-weight:700; font-size:clamp(1.6rem,3.4vw,2.4rem); letter-spacing:-.028em">Built to outlast the room</span></div>
+      <div class="scale-item"><span class="tag">H3 — clamp(1.15rem, 2vw, 1.4rem)</span><span style="font-family:var(--display); font-weight:700; font-size:1.3rem; letter-spacing:-.018em">The fiberglass grid</span></div>
+      <div class="scale-item"><span class="tag">Lede — 1.05–1.2rem</span><span style="font-family:var(--body); font-size:1.1rem; color:var(--ink-2)">A presentation problem, not a substance problem.</span></div>
+      <div class="scale-item"><span class="tag">Body — 1rem / 1.6</span><span style="font-family:var(--body)">Standard reading text throughout the site.</span></div>
+      <div class="scale-item"><span class="tag">Label — mono 11px / 0.2em</span><span class="mono" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase">Installation time · 1000 sqft</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— SIGNATURE ————————————————— -->
+<section class="band band--dark">
+  <div class="wrap">
+    <p class="eyebrow">The signature element</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">The lattice rule</h2>
+    <p class="lede">One ornament, derived directly from the product, used consistently. A hairline with connector blocks at the intersections — a fragment of their own grid, abstracted. It separates sections, underlines eyebrows, and at very low opacity and large scale it becomes the only background texture permitted on dark panels.</p>
+
+    <svg class="lattice" style="height:26px" viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="0" y="12" width="1200" height="2" fill="#7EBC4E" opacity=".55"/>
+      <g fill="#7EBC4E" opacity=".9">
+        <rect x="120" y="5" width="8" height="16"/><rect x="360" y="5" width="8" height="16"/>
+        <rect x="600" y="5" width="8" height="16"/><rect x="840" y="5" width="8" height="16"/>
+        <rect x="1080" y="5" width="8" height="16"/>
+      </g>
+    </svg>
+
+    <ul class="rules">
+      <li>Section dividers, full width, graphite on light and green-glow at 55% on dark.</li>
+      <li>Never more than one lattice rule per screen height.</li>
+      <li>As background texture: the same motif tiled, 3–4% opacity, dark panels only, never behind body text.</li>
+      <li>It is the only decorative device in the system. Nothing else is added.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ————————————————— MOTION ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Motion</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Slow, eased, engineered</h2>
+    <p class="lede">Motion here should feel like a well-machined drawer closing. Nothing springs, nothing bounces, nothing overshoots. Precision is the brand attribute being expressed.</p>
+
+    <table>
+      <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>micro</td><td class="num">180ms</td><td>hover, focus, button lift</td></tr>
+        <tr><td>standard</td><td class="num">400ms</td><td>state change, accordion, nav</td></tr>
+        <tr><td>enter</td><td class="num">720ms</td><td>scroll reveal, staggered content</td></tr>
+        <tr><td>scrub</td><td class="num">scroll-linked</td><td>hero pin, scale, overlap</td></tr>
+        <tr><td>ease-out</td><td class="num">cubic-bezier(.22,1,.36,1)</td><td>entrances</td></tr>
+        <tr><td>ease-scrub</td><td class="num">cubic-bezier(.65,0,.35,1)</td><td>scroll-driven scaling</td></tr>
+      </tbody>
+    </table>
+
+    <ul class="rules" style="margin-top:var(--s6)">
+      <li>Animate <code>transform</code> and <code>opacity</code> only. Never width, height, top, or margin.</li>
+      <li>Stagger sibling reveals by 80–120ms. Never more than four items in a stagger.</li>
+      <li>Scroll reveals travel a short distance: 16–24px. Long travel reads as cheap.</li>
+      <li><code>prefers-reduced-motion</code> renders the final state instantly. Non-negotiable.</li>
+      <li>Below 900px, drop scroll-scrubbing entirely and play reveals once on entry via IntersectionObserver.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The one orchestrated moment</strong> is the hero: the frame pins, scales from 58% to full bleed, the headline rises, then the next section climbs over it. Everything else on the page is quiet by comparison. Spend the boldness once. The mechanic is specified in <code>scroll-mechanic-reference.html</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— IMAGE TREATMENT ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Image treatment</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">One grade holds it together</h2>
+    <p class="lede">The source photographs are installer phone shots across four different lighting conditions. Left alone they read as a scrapbook. Graded to a single cool near-monochrome, they read as an authored body of work. This grading pass is the difference between "he used our Facebook photos" and "he made our work look intentional."</p>
+
+    <div class="cols">
+      <div>
+        <h3 style="font-size:1.05rem">Technical layer — grid, process, install</h3>
+        <p style="color:var(--ink-2); font-size:14px">Desaturate to 12–18%, cool the shadows slightly, lift black point marginally so it never crushes. Consistent across every image in these sections.</p>
+        <p class="mono" style="font-size:12px; background:var(--concrete-deep); padding:var(--s3); border-radius:2px; margin-top:var(--s3)">filter: saturate(.15) contrast(1.06) brightness(1.02);</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem">Payoff layer — finished floors, people</h3>
+        <p style="color:var(--ink-2); font-size:14px">Full colour, gently warmed. The return of colour <em>is</em> the emotional beat: you have come back up from under the floor to the room where the work happens.</p>
+        <p class="mono" style="font-size:12px; background:var(--concrete-deep); padding:var(--s3); border-radius:2px; margin-top:var(--s3)">filter: saturate(1.02) contrast(1.03);</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Grade assignment by section.</strong> Technical — <strong>04, 05, 06</strong>. Payoff — <strong>03, 08, 09, 10, 11</strong>. Hero (<strong>01</strong>) carries no filter and is the deliberate exception. Sections <strong>02</strong> and <strong>07</strong> have no imagery. <em>Section 11 was added to the payoff list v1.1</em> — its texture break is <code>react-edge-macro.jpg</code>, the same product from the same shoot as the two React swatches in section 08. The same subject appearing twice on one page under two different treatments is the kind of inconsistency a careful eye catches without being able to name it. Every section now has an assigned grade; none are left to be inferred.</p>
+    </div>
+
+    <div class="cols" style="margin-top:0">
+    </div>
+
+    <ul class="rules" style="margin-top:var(--s7)">
+      <li>The hero (maple + lattice) is the deliberate exception: keep its warmth at full strength. It is the only warm image above the fold.</li>
+      <li>No image sits at full bleed unless it is sharp at 2000px+. Soft images are contained, never enlarged.</li>
+      <li>Every image carries descriptive alt text naming the institution where known.</li>
+      <li>Serve AVIF with WebP and JPEG fallbacks. Hero preloaded, never lazy-loaded.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ————————————————— COMPONENTS ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Components</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Small parts, tightly specified</h2>
+
+    <h3 style="font-size:1.05rem; margin-top:var(--s7)">Actions</h3>
+    <div style="display:flex; gap:var(--s4); flex-wrap:wrap; margin-top:var(--s4)">
+      <a href="#" class="btn"><span class="btn__dot"></span>Request a quote</a>
+      <a href="#" class="btn btn--ghost">See the technology</a>
+    </div>
+    <p style="color:var(--ink-2); font-size:14px; margin-top:var(--s3)">One primary action per screen. The green dot is the only green in most viewports — it functions as a maker's mark, not as a colour scheme.</p>
+
+    <h3 style="font-size:1.05rem; margin-top:var(--s7)">Actions on dark</h3>
+    <div class="btn-strip-dark">
+      <a href="#" class="btn btn--on-dark"><span class="btn__dot"></span>Request a quote</a>
+      <a href="#" class="btn btn--ghost-dark">See the technology</a>
+    </div>
+    <p style="color:var(--ink-2); font-size:14px; margin-top:var(--s3)">The light ghost button is transparent with ink text, so it disappears the moment it sits over a photograph or a graphite panel. These two variants exist for that case and no other. Geometry, padding, weight, dot and timing are unchanged — the primary gains a faint light edge so it separates from the image behind it, and the ghost inverts its border and text to <code>--ink-inv</code>. Do not introduce further button variants; two on light and two on dark is the whole set.</p>
+
+    <h3 style="font-size:1.05rem; margin-top:var(--s8)">Spec block</h3>
+    <p style="color:var(--ink-2); font-size:14px">Mono numerals, hairline dividers, no icons. Used for product specs and for the operational figures.</p>
+    <div class="specs">
+      <div><span class="v">30+</span><span class="k">Year material life</span></div>
+      <div><span class="v">3mm</span><span class="k">Deflection, every test</span></div>
+      <div><span class="v">20</span><span class="k">Year grid warranty</span></div>
+      <div><span class="v">3 hrs</span><span class="k">800 sqft, Go floor</span></div>
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:var(--s8)">Comparison table</h3>
+    <p style="color:var(--ink-2); font-size:14px">Their strongest existing asset. Keep the content, rebuild the presentation: hairlines only, no fills, mono for values, generous row padding. The FiberSprung column carries a single 2px green rule above it — nothing else.</p>
+    <table>
+      <thead><tr><th>&nbsp;</th><th style="color:var(--green-deep)">FiberSprung</th><th>Wood sprung</th><th>Foam</th></tr></thead>
+      <tbody>
+        <tr><td>Subfloor material</td><td>Fiberglass</td><td>Wood</td><td>Foam</td></tr>
+        <tr><td>Life expectancy</td><td class="num">30+ yrs</td><td class="num">~15 yrs</td><td class="num">&lt;8 yrs</td></tr>
+        <tr><td>Water damage</td><td>Surface replacement</td><td>Entire floor</td><td>Entire floor</td></tr>
+        <tr><td>Relocatable</td><td>Yes</td><td>No</td><td>Depends</td></tr>
+        <tr><td>Resaleable</td><td>Yes</td><td>No</td><td>Depends</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:1.05rem; margin-top:var(--s8)">Recognition band</h3>
+    <p style="color:var(--ink-2); font-size:14px">Set as wordmarks in display type until logo files and written usage rights are confirmed. Typeset names look deliberate; mismatched logo files at different weights and resolutions look scrappy — which is exactly why the current site's band fails. Quiet, high on the page, never a carousel.</p>
+    <div class="recog">
+      <span>Pace University</span><span>SUNY Purchase</span><span>NBC Universal</span>
+      <span>Hunter Dance Center</span><span>Newport Contemporary Ballet</span><span>Bayou City Ballet</span>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— PAGE ARCHITECTURE ————————————————— -->
+<section class="band band--dark">
+  <div class="wrap">
+    <p class="eyebrow">Homepage architecture</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Nine movements, alternating surface and substructure</h2>
+    <p class="lede">Read the L / D marks as a rhythm. The reader descends below the floor for the engineering, then returns to the surface for the payoff.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="plan">
+      <span class="role">01 · Hero · Light → the pinned moment</span>
+      <h4>Your Forever Floor</h4>
+      <p>The maple-and-lattice macro pins, scales to full bleed, headline rises, next section covers it. One sentence of subhead: patented fiberglass sprung flooring, built to outlast the room it's installed in. Single action.</p>
+      <span class="asset">img 14 — maple + lattice macro</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">02 · Recognition · Light</span>
+      <h4>Where these floors already are</h4>
+      <p>Quiet wordmark band, high on the page, immediately after the hero. This is the fix for the single most visible defect on the current site.</p>
+      <span class="asset">typeset names</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">03 · Thesis · Light</span>
+      <h4>Longevity, proven by water</h4>
+      <p>Longevity is the claim; water resistance is what makes it believable. Wood floods and is gone. Theirs is a surface replacement. Three short blocks — sustainability, consistency, support — rewritten tight from their existing copy, no Read More links.</p>
+      <span class="asset">img 10 or 16 — finished floor</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">04 · The reveal · Light → Dark</span>
+      <h4>What's underneath</h4>
+      <p>The transition into the substructure. Grid meets finished plywood in a single frame. This is where the page goes dark and stays dark for two sections.</p>
+      <span class="asset">img 20 — grid/plywood edge</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">05 · Technology · Dark</span>
+      <h4>The patented fiberglass grid</h4>
+      <p>The moat against wood and foam. Lattice texture at 3% behind. Spec block in mono. This is where the bend-test data lives: ten beams, two suppliers, 1×4 pine, wood deflecting 3–7mm and inconsistently, fiberglass 3mm every single time. Present as a clean data comparison, not a paragraph.</p>
+      <span class="asset">img 15 — B&amp;W lattice</span><span class="asset">custom bend-test graphic</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">06 · Process · Dark</span>
+      <h4>Five steps, in order</h4>
+      <p>Numbered 01–05, because this genuinely is a sequence: design and planning in CAD, pre-assembly and delivery, the grid, the support surface, the performance surface. Numbering here encodes real information rather than decorating.</p>
+      <span class="asset">img 13</span><span class="asset">img 8</span><span class="asset">img 9</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">07 · Comparison · Dark → Light</span>
+      <h4>Against wood and foam</h4>
+      <p>The table, rebuilt. The return to light begins here — the argument is settled, we're coming back up to the surface.</p>
+      <span class="asset">existing comparison content</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">08 · The payoff · Light, full colour</span>
+      <h4>Rooms that are ready</h4>
+      <p>Finished floors, colour restored, people present. Portability told through the outdoor-event frame. This is the emotional landing and the section the September photography will most improve.</p>
+      <span class="asset">img 10</span><span class="asset">img 16/17</span><span class="asset">dancers — rights pending</span><span class="asset">portable floor event</span>
+    </div>
+
+    <div class="plan">
+      <span class="role">09 · Contact · Light</span>
+      <h4>Start a conversation</h4>
+      <p>Five fields: space type, approximate square footage, timeline, name, contact. Both phone numbers, Moasure, financing. The chat function persists in the header on every page — it is the one feature that already produces business.</p>
+      <span class="asset">—</span>
+    </div>
+  </div>
+</section>
+
+<!-- ————————————————— QUALITY FLOOR ————————————————— -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Quality floor</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Non-negotiable</h2>
+    <div class="cols">
+      <div>
+        <h3 style="font-size:1.05rem">Structure &amp; search</h3>
+        <ul class="rules">
+          <li>One H1 per page, logical H2/H3 beneath it.</li>
+          <li>Semantic landmarks: header, nav, main, section, footer.</li>
+          <li>Unique meta title and description per page, written by hand.</li>
+          <li>Descriptive alt text on every image.</li>
+          <li>Descriptive URLs, XML sitemap, Search Console verified.</li>
+          <li>Organization schema covering both facilities.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem">Access &amp; performance</h3>
+        <ul class="rules">
+          <li>4.5:1 contrast minimum on all text. Bright green never carries text on light.</li>
+          <li>Visible keyboard focus on every interactive element.</li>
+          <li>Reduced motion fully respected.</li>
+          <li>Hero preloaded, not lazy-loaded. LCP under 2.5s.</li>
+          <li>Responsive to 360px. Scroll-scrub disabled below 900px.</li>
+          <li>No layout shift. Explicit dimensions on every image.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:var(--s8); padding-bottom:var(--s10)">
+  <svg class="lattice" viewBox="0 0 1200 22" preserveAspectRatio="none" aria-hidden="true">
+    <rect x="0" y="10" width="1200" height="2" fill="#191D1B"/>
+    <g fill="#191D1B">
+      <rect x="140" y="4" width="7" height="14"/><rect x="420" y="4" width="7" height="14"/>
+      <rect x="700" y="4" width="7" height="14"/><rect x="980" y="4" width="7" height="14"/>
+    </g>
+  </svg>
+  <p class="mono" style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-2)">RF Digital · design system v1 · for FiberSprung</p>
+</div>
+
+</body>
+</html>

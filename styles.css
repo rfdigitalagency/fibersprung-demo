@@ -1,0 +1,1534 @@
+/* ══════════════════════════════════════════════════════════════
+   FiberSprung — homepage
+   Tokens copied verbatim from design-system/fibersprung-design-system.html
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ————— SURFACE (above the floor) ————— */
+  --concrete:      #EAECE9;
+  --concrete-deep: #DEE1DD;
+  --paper:         #FAFBFA;
+  --line:          #CDD2CC;
+
+  /* ————— SUBSTRUCTURE (below the floor) ————— */
+  --graphite:      #191D1B;
+  --graphite-deep: #111413;
+  --line-dark:     #2E3431;
+
+  /* ————— INK ————— */
+  --ink:           #131614;
+  --ink-2:         #4A524E;
+  --ink-inv:       #EDEFEC;
+  --ink-inv-2:     #9BA49F;
+
+  /* ————— MATERIAL ACCENTS ————— */
+  --birch:         #E3D6BE;
+  --maple:         #C9A87C;
+
+  /* ————— SIGNAL ————— */
+  --green:         #70AB41;
+  --green-deep:    #486D29;   /* v1.2 — was #496F2A, which passed on --concrete
+                                 (4.92:1) but failed on --concrete-deep (4.43:1).
+                                 Now 5.06:1 and 4.56:1. Hue held at 93deg. */
+  --green-glow:    #7EBC4E;
+
+  /* ————— TYPE ————— */
+  --display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --body:    "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --data:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ————— SPACE (8px base) ————— */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px; --s11:192px;
+
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --radius: 3px;
+
+  /* ————— MOTION ————— */
+  --micro: 180ms;
+  --std:   400ms;
+  --enter: 720ms;
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --ease-scrub: cubic-bezier(.65,0,.35,1);
+}
+
+/* ─────────── base ─────────── */
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--concrete);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;   /* NOT hidden: hidden creates a scroll container on body,
+                        which silently kills position:sticky on the hero. clip
+                        clips without becoming one. */
+}
+
+h1,h2,h3,h4{
+  font-family:var(--display);
+  font-weight:700;   /* Space Grotesk tops out at 700; was Cabinet 800 */
+  letter-spacing:-.025em;
+  line-height:1.02;
+  margin:0;
+}
+
+img{max-width:100%; display:block}
+
+/* Every number on this site is mono. Inline numerals are set slightly
+   smaller so JetBrains Mono's larger x-height sits level with Switzer. */
+.mono{font-family:var(--data); font-size:.94em; font-variant-numeric:tabular-nums}
+
+/* Visible keyboard focus, everywhere. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+  outline:2px solid var(--green-deep);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.hero a:focus-visible{outline-color:var(--green-glow)}
+
+.skip{
+  position:absolute; left:var(--s4); top:-100px; z-index:100;
+  background:var(--ink); color:var(--concrete);
+  padding:var(--s3) var(--s4); border-radius:var(--radius);
+  font-size:14px; font-weight:600; text-decoration:none;
+  transition:top var(--micro) var(--ease-out);
+}
+.skip:focus{top:var(--s4)}
+
+/* ─────────── buttons (design system) ─────────── */
+
+/* Rebuilt 2026-07-25: 16px/600, 16×28 padding, no dot. Light sections keep
+   the ink-fill primary; the hero pair below is white-on-photo. */
+.btn{
+  display:inline-flex; align-items:center; gap:var(--s3);
+  font-family:var(--body); font-weight:600; font-size:16px;
+  padding:16px 28px; border-radius:var(--radius); border:1px solid var(--ink);
+  background:var(--ink); color:var(--concrete); text-decoration:none;
+  transition:transform var(--micro) var(--ease-out), background var(--micro) linear;
+}
+.btn:hover{transform:translateY(-2px); background:#000}
+
+.btn--ghost{background:transparent; color:var(--ink)}
+.btn--ghost:hover{background:var(--ink); color:var(--concrete)}
+
+
+/* On-photo pair. Primary: solid white, ink text, dims to 95% white on
+   hover (the lift comes from the base rule). Secondary: transparent with a
+   1.5px white border. Both override the base hover's #000 fill. */
+.btn--on-dark{
+  background:#fff; color:var(--ink); border-color:#fff;
+}
+.btn--on-dark:hover{background:rgba(255,255,255,.95)}
+.btn--ghost-dark{
+  background:transparent; color:#fff;
+  border:1.5px solid #fff;
+}
+.btn--ghost-dark:hover{background:transparent; color:#fff}
+
+/* ─────────── floating chat action ─────────── */
+/* Fixed above everything; z-index 50 clears every section (max 2) and the
+   header (3). CONTRAST NOTE: white on #70AB41 measures 2.75:1 — below the
+   4.5:1 floor. Spec'd explicitly; flagged in copy-changes.md open items. */
+.chat-fab{
+  position:fixed; right:24px; bottom:24px; z-index:50;
+  display:inline-flex; align-items:center; gap:var(--s3);
+  background:var(--green); color:#fff;
+  font-family:var(--body); font-weight:600; font-size:18px;
+  min-height:56px; padding:0 28px; border-radius:999px;
+  text-decoration:none;
+  box-shadow:0 6px 24px rgba(17,20,19,.28), 0 2px 6px rgba(17,20,19,.18);
+  transition:transform var(--micro) var(--ease-out), box-shadow var(--micro) linear;
+}
+.chat-fab:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 32px rgba(17,20,19,.32), 0 3px 8px rgba(17,20,19,.2);
+}
+.chat-fab:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+.chat-fab__icon{flex:none}
+
+@media (max-width:560px){
+  .chat-fab{
+    width:56px; height:56px; min-height:0; padding:0;
+    justify-content:center;
+  }
+  .chat-fab__label{
+    position:absolute; width:1px; height:1px; margin:-1px;
+    clip:rect(0 0 0 0); clip-path:inset(50%); overflow:hidden;
+  }
+}
+
+/* ─────────── header ─────────── */
+
+/* Fixed, compressing on scroll. Rest: 40px mark + 2×16px padding = 72px.
+   Scrolled: padding drops to 8px = 56px, shadow lifts it off the page.
+   z-index 40 — above every section (max 2), below the chat FAB (50) and
+   the skip link (100). Both states are opaque concrete. */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:40;
+  background:var(--concrete);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow 300ms var(--ease-out);
+}
+.site-header.is-scrolled{
+  box-shadow:0 1px 12px rgba(0,0,0,.06);
+}
+.site-header__inner{
+  max-width:1180px; margin:0 auto; padding:var(--s4) var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:var(--s5);
+  transition:padding 300ms var(--ease-out);
+}
+.site-header.is-scrolled .site-header__inner{
+  padding-top:var(--s2); padding-bottom:var(--s2);
+}
+
+/* Fixed header: anchor targets must land below it, and the hero already
+   fills the viewport so only in-page jumps need the offset. */
+section[id], footer{scroll-margin-top:88px}
+
+.brand{
+  display:inline-flex; align-items:center; gap:var(--s3);
+  color:var(--ink); text-decoration:none;
+}
+.brand__mark{width:40px; height:40px; flex:none}
+.brand__word{
+  font-family:var(--display); font-weight:700;
+  font-size:1.6rem; letter-spacing:-.02em;   /* scaled with the 26→40px mark */
+}
+
+.site-nav{display:flex; gap:var(--s5); flex-wrap:wrap; align-items:center}
+.site-nav a{
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-2); text-decoration:none;
+  padding:var(--s2) 0;
+  transition:color var(--micro) linear;
+}
+.site-nav a:hover{color:var(--ink)}
+
+@media (max-width:560px){
+  .site-header__inner{flex-direction:column; align-items:flex-start; gap:var(--s3)}
+  .site-nav{gap:var(--s4)}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   01 · HERO
+   Immediate. Full bleed from first paint, finished within a second.
+   No pin, no scale-up entrance — that mechanic now lives in section 04.
+   ══════════════════════════════════════════════════════════════ */
+
+.hero{
+  /* Freeze-and-cover: the hero holds the viewport while section 02 scrolls
+     up over it in normal flow. Pure CSS — sticky, not scrub. z-index:0 so
+     every later section (all positioned, z-index:1+) paints above it;
+     without that, a positioned sticky element paints over later in-flow
+     siblings and the page would never cover it. overflow:hidden on the hero
+     itself is safe — the constraint is on ANCESTORS of the sticky element. */
+  position:sticky;
+  top:0;
+  z-index:0;
+  height:100vh;
+  height:100svh;
+  min-height:520px;
+  overflow:hidden;
+  background:var(--graphite-deep);
+}
+
+/* Everything after the hero rides above it. */
+main > :not(.hero){position:relative; z-index:1}
+main > .reveal{z-index:1}
+.site-footer{position:relative; z-index:1}
+
+/* The parallax plane — image, scrim and caption drift as one at 0.35×
+   scroll. JS translates this; desktop only, off under reduced motion. */
+.hero__plane{
+  position:absolute; inset:0;
+  will-change:transform;
+}
+
+/* Image overscan inside the plane: 135% tall, so at maximum plane travel
+   (0.35 × viewport) the picture still reaches the hero's bottom edge. */
+.hero__media{
+  position:absolute; top:0; left:0; right:0;
+  height:135%;
+}
+
+/* Full bleed, cover, at rest from the very first frame. The only motion is
+   an ambient drift: 1.0 → 1.04 and back, ~20s each way, ease-in-out. It
+   alternates rather than running one way and freezing, so the frame never
+   arrives at an end state and stops dead.
+   The hero is the deliberate exception to the cool grade: no filter. */
+.hero__img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:50% 60%;
+  filter:none;
+  transform-origin:50% 55%;
+  animation:heroDrift 20s var(--ease-scrub) infinite alternate;
+  will-change:transform;
+}
+
+@keyframes heroDrift{
+  from{transform:scale(1)}
+  to  {transform:scale(1.04)}
+}
+
+.hero__scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(to top right, rgba(0,0,0,.55), rgba(0,0,0,.15) 55%, transparent);
+}
+
+/* One left-aligned block, anchored lower-left, on the content gutter.
+   At 1440px the H1 clamp(4rem, 9vw, 7.5rem) renders 9vw = 129.6px — the cap
+   (120px) wins from 1334px up. */
+/* The inner .wrap is the same box as .site-header__inner — max-width 1180,
+   gutter padding inside the border box — so the eyebrow's left edge lands on
+   the same pixel as the header logo at every viewport width. */
+.hero__caption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:0 0 clamp(var(--s7), 8vh, var(--s9));
+  color:var(--ink-inv);
+}
+
+.hero__eyebrow{
+  font-family:var(--data); font-size:12px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--green-glow);
+  margin:0 0 var(--s4);
+}
+.hero__title{
+  font-size:clamp(4rem, 9vw, 7.5rem);
+  letter-spacing:-.035em;
+  max-width:12ch;
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+.hero__sub{
+  margin:var(--s5) 0 0;
+  max-width:44ch;
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
+  font-size:clamp(1rem, 1.5vw, 1.15rem);
+  line-height:1.55;
+  color:#DDE2DE;
+}
+.hero__actions{
+  display:flex; flex-wrap:wrap; gap:var(--s4);
+  margin-top:var(--s7);
+}
+
+/* ─────────── entrance: once, on load, not scroll-linked ─────────── */
+/* Note the direction of the fallback. These three sit at opacity 1 in the
+   base cascade; the hidden state exists ONLY inside the keyframe, surfaced
+   before the delay by animation-fill-mode: backwards. If animation never
+   runs, the h1 and both CTAs are already visible. Nothing here depends on
+   JavaScript, and there is no .js scoping in this section at all. */
+.hero__eyebrow,
+.hero__title,
+.hero__sub,
+.hero__actions{
+  animation:heroRise var(--enter) var(--ease-out) backwards;
+}
+.hero__eyebrow{animation-delay:40ms}
+.hero__title  {animation-delay:120ms}
+.hero__sub    {animation-delay:220ms}
+.hero__actions{animation-delay:320ms}
+
+@keyframes heroRise{
+  from{opacity:0; transform:translateY(20px)}
+  to  {opacity:1; transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero__img{animation:none; transform:none}
+  .hero__title,
+  .hero__sub,
+  .hero__actions{animation:none}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   02 · RECOGNITION
+   Light. Typeset names, no logo files, never a carousel.
+   Doubles as the cover panel that climbs over the pinned hero.
+   ══════════════════════════════════════════════════════════════ */
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 var(--gutter)}
+
+/* THE STACKING FIX. .band had no background, so every plain band was a
+   transparent panel compositing over the permanently-visible sticky hero.
+   Every section must be opaque: .band gets its assigned base colour here,
+   and the variants (--dark, --alt, .cover, .reveal) override it later in
+   the cascade with theirs. */
+/* Separation is by surface colour now — no hairlines between sections.
+   Light bands alternate: 03 C · 07 C · 08 D · 09 C · 10 D · 11 C,
+   recognition on paper, footer deep. */
+.band{padding:var(--s9) 0; background:var(--concrete)}
+
+.eyebrow{
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--green-deep);
+  display:flex; align-items:center; gap:var(--s3); margin:0 0 var(--s5);
+}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--line)}
+
+/* The credential wall. Display face at ~22px, full ink. The moving row is
+   decorative (aria-hidden); .recog-static is the copy assistive tech reads,
+   and the copy that becomes the visible band under reduced motion. */
+
+.recog-static{
+  /* visually hidden by default — real, readable, motionless for AT */
+  position:absolute; width:1px; height:1px;
+  margin:-1px; padding:0; border:0;
+  clip:rect(0 0 0 0); clip-path:inset(50%);
+  overflow:hidden; white-space:nowrap;
+  list-style:none;
+}
+
+.marquee{
+  overflow:hidden;
+  margin-top:var(--s6);
+  /* Opaque backdrop matters twice over: the mask below creates a stacking
+     context that isolates blending, so the logos' multiply blend needs a
+     surface INSIDE the group to blend into — this is it. It MUST match the
+     band surface (paper, as of the surface shift) or every white-background
+     logo renders on a visibly wrong tint. */
+  background:var(--paper);
+  /* soft fade at both edges so names enter and leave rather than pop */
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+/* The CSS animation is the no-JS fallback only. Its −50% is *nominally*
+   one set width, but the browser may round the two sets' laid-out widths
+   differently, which is the loop jump. script.js measures the first set's
+   rendered width after images load, kills this animation, and drives the
+   translate itself over exactly that many pixels. */
+.marquee__track{
+  display:flex;
+  width:max-content;
+  animation:recogLoop 38s linear infinite;
+  will-change:transform;
+}
+.marquee:hover .marquee__track{animation-play-state:paused}
+
+.marquee__set{
+  display:flex;
+  list-style:none; margin:0; padding:0;
+  gap:var(--s8);
+  padding-right:var(--s8);  /* equals the gap, so set 2 lands seamlessly */
+}
+.marquee__set li{display:flex; align-items:center; white-space:nowrap}
+
+/* Logos: normalized to one height, quiet by default, full colour on hover.
+   multiply lets the white-background files (SUNY jpg, Pace, TCDP) sink into
+   the band instead of floating as white boxes. */
+.marquee__set img{
+  height:50px; width:auto;
+  filter:saturate(.7) opacity(.85);
+  mix-blend-mode:multiply;
+  transition:filter var(--micro) linear;
+}
+.marquee__set img:hover{filter:none}
+
+/* Newnan is white-on-transparent: grayscale then invert renders it dark on
+   the light band. Hover releases opacity but keeps the invert — "full
+   colour" for a white-on-transparent file on a light background does not
+   exist; flagged in copy-changes.md. */
+.marquee__set img.logo--invert{filter:grayscale(1) invert(1) opacity(.85)}
+.marquee__set img.logo--invert:hover{filter:grayscale(1) invert(1) opacity(1)}
+
+/* Two identical sets; −50% of the track is exactly one set + its trailing
+   gap, so the loop point is invisible. */
+@keyframes recogLoop{
+  from{transform:translateX(0)}
+  to  {transform:translateX(-50%)}
+}
+
+
+
+/* The cover. The hero is sticky beneath; this section rides over it in
+   normal flow at every width, including 360px — no runway, no negative
+   margin, no JS. Rounded top per the scroll-mechanic reference's cover
+   treatment, so the edge reads deliberate rather than as a seam.
+   Padding is half the standard band — a credential strip, not a chapter. */
+/* Its own surface: paper between the concrete neighbours. The surface
+   shift does the separating — no hairline above or below. Padding sits at
+   ~60% of the standard band (56px vs 96px), up from the earlier 50% cut. */
+.cover{
+  background:var(--paper);
+  border-top:none;
+  border-radius:26px 26px 0 0;
+  box-shadow:0 -24px 48px rgba(0,0,0,.12);
+  padding:calc(var(--s7) + var(--s2)) 0;
+}
+
+.eyebrow--center{
+  display:block; text-align:center;
+  font-size:14px; letter-spacing:.22em;
+}
+.eyebrow--center::after{display:none}
+
+/* ══════════════════════════════════════════════════════════════
+   SHARED — typography, image grades, spec block
+   ══════════════════════════════════════════════════════════════ */
+
+.h2{font-size:clamp(1.9rem, 4vw, 3.25rem); letter-spacing:-.028em; max-width:20ch}   /* cap 48→52px; 4vw hits it from 1300px up */
+
+h3{font-size:clamp(1.15rem, 2vw, 1.4rem); font-weight:700; letter-spacing:-.018em}
+
+.lede{max-width:var(--measure); color:var(--ink-2); font-size:1.05rem; margin:var(--s5) 0 0}
+
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:var(--s7); margin-top:var(--s6)}
+
+/* The two grades from the design system. Applied per section, per the brief.
+   The hero carries no filter — it is the deliberate exception. */
+.grade-technical{filter:saturate(.15) contrast(1.06) brightness(1.02)}
+.grade-payoff{filter:saturate(1.02) contrast(1.03)}
+
+.figure{margin:0}
+.figure img{
+  width:100%; height:auto;
+  background:var(--concrete-deep);
+}
+
+/* ─────────── contained-image frame treatment (sitewide) ───────────
+   Every contained image: 5px radius, soft shadow, and a slow zoom on
+   container hover. The container clips (overflow:hidden) so the scale
+   never escapes the frame; the img transitions transform only.
+   Excluded by design: the hero and the reveal seam (full bleed), and the
+   transparent CAD drawing (a frame around nothing). */
+.figure, .swatch, .step__figure, .step__render, .bend__diagram{
+  border-radius:5px;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+.figure img, .swatch img, .step__figure img, .step__render img,
+.bend__diagram img{
+  border-radius:0;                    /* the container clips now */
+  transition:transform 700ms var(--ease-out);
+  will-change:transform;
+}
+.figure:hover img, .swatch:hover img, .step__figure:hover img,
+.step__render:hover img, .bend__diagram:hover img{
+  transform:scale(1.04);
+}
+
+/* The dimensioned CAD drawing is light lines on transparency — a shadowed,
+   zooming frame around it would be a frame around nothing. */
+.step__figure.step__layout{box-shadow:none; border-radius:0; overflow:visible}
+.step__layout:hover img{transform:none}
+
+/* Spec block: mono numerals, hairline dividers, no icons. */
+.specs{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+  gap:1px; background:var(--line); border:1px solid var(--line);
+  margin:var(--s9) 0 0;
+}
+.specs > div{
+  background:var(--paper); padding:var(--s5);
+  display:flex; flex-direction:column-reverse; /* value reads above its label */
+}
+.specs .v{
+  font-family:var(--data); font-size:clamp(1.5rem, 3vw, 2.1rem);
+  font-weight:500; letter-spacing:-.02em; margin:0;
+  font-variant-numeric:tabular-nums;   /* count-up digits must not jitter */
+}
+.specs .k{
+  font-family:var(--data); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-2); margin-top:6px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   03 · THESIS
+   Light. Text leads, one contained portrait frame beside it.
+   ══════════════════════════════════════════════════════════════ */
+
+.thesis__intro{display:grid; gap:var(--s7); align-items:start}
+
+/* In-column spec block: 2×2, tighter margin than the old full-width row. */
+.specs--thesis{
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  margin-top:var(--s7);
+}
+
+/* Contained, never full bleed. The cap matters most in the single-column
+   layout, where an uncapped 4:5 frame would fill the screen and read as a
+   bleed. This photograph is 1440×1800 and not hero-grade sharp — it is never
+   displayed above roughly 520px, so it is always downscaling. */
+.thesis__intro .figure{max-width:520px}
+
+.pillars > div{
+  border-top:1px solid var(--line);
+  padding-top:var(--s4);
+}
+.pillar__num{
+  display:block;
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  color:var(--green-deep);
+  margin-bottom:var(--s3);
+}
+.pillars p{color:var(--ink-2); margin:var(--s3) 0 0; max-width:44ch}
+
+@media (min-width:900px){
+  .thesis__intro{grid-template-columns:1.15fr .85fr; gap:var(--s8)}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   04 · REVEAL
+   Light → Dark. The photograph is the seam.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Graphite base: everything below the photograph is already dark, so 05
+   continues without a join. */
+.reveal{background:var(--graphite)}
+
+.reveal__top{
+  background:var(--concrete);
+  padding:var(--s9) 0;
+}
+.reveal__top .lede{max-width:56ch}
+
+.reveal__figure{
+  margin:0;
+  display:block;
+  background:var(--graphite-deep);
+}
+.reveal__figure img{
+  width:100%;
+  height:clamp(320px, 68vh, 760px);
+  object-fit:cover;
+  object-position:50% 50%;
+  border-radius:0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   05 · TECHNOLOGY
+   Dark. The bend test is the centerpiece — a data comparison, not prose.
+   ══════════════════════════════════════════════════════════════ */
+
+.band--dark{background:var(--graphite); color:var(--ink-inv)}
+.band--dark h2,
+.band--dark h3{color:var(--ink-inv)}
+.band--dark .lede{color:var(--ink-inv-2)}
+.band--dark .eyebrow{color:var(--green-glow)}
+.band--dark .eyebrow::after{background:var(--line-dark)}
+
+/* ─────────── the stage: pin, scale, overlap ─────────── */
+
+.tech{background:var(--graphite); color:var(--ink-inv)}
+.tech .eyebrow{color:var(--green-glow)}
+.tech .eyebrow::after{background:var(--line-dark)}
+.tech .lede{color:var(--ink-inv-2)}
+.tech .h2{color:var(--ink-inv)}
+
+.tech-stage{position:relative}
+.tech-stage__pin{background:var(--graphite)}
+
+/* Base = mobile / no-JS / reduced motion: a static contained frame with the
+   caption stacked above the image. */
+.tech-stage__frame{
+  margin:0;
+  padding:var(--s9) 0 0;
+  background:var(--graphite);
+}
+.tech-stage__plane{display:flex; flex-direction:column-reverse}
+.tech-stage__img{width:100%; height:auto; display:block}
+.tech-stage__scrim{display:none}
+.tech-stage__caption{padding-bottom:var(--s7)}
+.tech-stage__sub .lede + .lede{margin-top:var(--s5)}
+.tech-stage__sub{margin-top:var(--s5)}
+
+/* Desktop + JS: the scrub. Runway height and rest scale live under html.js
+   so a script failure leaves a clean static layout, not a stuck small
+   frame in a 300vh corridor. */
+@media (min-width:900px){
+  .js .tech-stage{height:300vh}
+  .js .tech-stage__pin{
+    position:sticky; top:0; height:100vh;
+    overflow:hidden;
+    display:grid; place-items:center;
+  }
+  .js .tech-stage__frame{
+    width:100vw; height:100vh;
+    padding:0;
+    transform:scale(.58);
+    border-radius:14px;
+    overflow:hidden;
+    will-change:transform;
+  }
+  .js .tech-stage__plane{
+    display:block;
+    position:absolute; top:0; left:0; right:0;
+    height:130%;                 /* overscan for the 0.35× drift tail */
+    will-change:transform;
+  }
+  .js .tech-stage__img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:50% 40%;
+  }
+  .js .tech-stage__scrim{
+    display:block;
+    position:absolute; inset:0;
+    /* Stops are in PLANE space: the scrim spans the 130% plane, so the
+       visible frame's bottom edge is 77% of this element, not 100%. */
+    background:linear-gradient(
+      180deg,
+      rgba(17,20,19,.15) 0%,
+      rgba(17,20,19,.4) 35%,
+      rgba(17,20,19,.85) 60%,
+      rgba(17,20,19,.96) 77%
+    );
+  }
+  .js .tech-stage__caption{
+    position:absolute; left:0; right:0;
+    /* The plane is 130% of the 100vh frame, so its bottom edge sits 30vh
+       BELOW the visible frame. bottom:0 would park the caption offscreen;
+       30vh lands it exactly on the frame's bottom edge. */
+    bottom:30vh;
+    padding-top:var(--s9);
+    padding-bottom:clamp(var(--s7), 8vh, var(--s9));
+    /* Local backdrop: rides with the caption, so legibility holds for
+       every line — including the eyebrow at the top of a tall block —
+       independent of where the block sits against the global scrim. */
+    background:linear-gradient(180deg, rgba(17,20,19,0) 0, rgba(17,20,19,.85) var(--s9));
+  }
+
+  /* The small text was ink-inv-2 — mid grey on a mid-grey photograph.
+     Near-white with a soft shadow, same treatment as the hero. */
+  .js .tech-stage__caption .lede{
+    color:var(--ink-inv);
+    text-shadow:0 2px 8px rgba(0,0,0,.4);
+  }
+  .js .tech-stage__caption .h2{text-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .js .tech-stage__caption .eyebrow{text-shadow:0 1px 4px rgba(0,0,0,.6)}
+  /* JS writes opacity/transform inline while scrubbing. */
+}
+
+/* The detail climbs over the pinned frame — same cover voice as section 02,
+   graphite on graphite, so the shadow does the talking. */
+.tech-detail{
+  position:relative; z-index:2;
+  background:var(--graphite);
+  padding:var(--s9) 0;
+}
+@media (min-width:900px){
+  .js .tech-detail{
+    margin-top:-10vh;
+    border-radius:26px 26px 0 0;
+    box-shadow:0 -24px 48px rgba(0,0,0,.35);
+  }
+}
+
+/* ─────────── the bend test ─────────── */
+
+.bend{margin-top:var(--s7); border-top:1px solid var(--line-dark); padding-top:var(--s6)}   /* 96/64 → 48/32 */
+.bend__head .lede{max-width:58ch}
+
+/* One row of four figures; the diagram sits beneath, spanning. The old
+   auto-fit grid wrapped 3+1 at common widths, leaving an empty fourth cell
+   in the second row. */
+.bend__intro{display:grid; gap:var(--s5); align-items:start}
+@media (min-width:900px){
+  .bend__intro{grid-template-columns:minmax(0,1fr) 340px; gap:var(--s8)}
+  .bend__intro .bend__diagram{margin-top:var(--s2)}   /* optically top-aligned with the h3 */
+}
+
+.bend__method{
+  position:relative;
+  margin-top:var(--s5);
+  display:grid; gap:var(--s5);
+  padding:var(--s4) 0;
+}
+.bend__method .specs{grid-template-columns:repeat(4, minmax(0,1fr))}
+.bend__method .specs > div{padding:var(--s4)}
+@media (max-width:700px){
+  .bend__method .specs{grid-template-columns:repeat(2, minmax(0,1fr))}
+}
+
+/* The lattice motif, tiled at 3%. Dark panels only, and here it sits behind
+   mono data and a diagram — never behind body text. */
+.bend__method::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.03;
+  background-image:
+    repeating-linear-gradient(90deg, var(--ink-inv) 0 2px, transparent 2px 74px),
+    repeating-linear-gradient(0deg,  var(--ink-inv) 0 2px, transparent 2px 74px);
+}
+.bend__method > *{position:relative}
+
+.specs--dark{background:var(--line-dark); border-color:var(--line-dark); margin:0}
+.specs--dark > div{background:var(--graphite-deep)}
+.specs--dark .v{color:var(--ink-inv)}
+.specs--dark .k{color:var(--ink-inv-2)}
+
+/* Small inset only. 560px native and generic — never a section anchor. */
+.bend__diagram{margin:0; max-width:340px}
+.bend__diagram img{
+  width:100%; height:auto;
+  border-radius:var(--radius);
+  opacity:.85;
+}
+
+.bend__results{display:grid; gap:var(--s5); margin-top:var(--s5)}
+
+.result{
+  background:var(--graphite-deep);
+  border-top:2px solid var(--line-dark);
+  padding:var(--s6) var(--s5) var(--s5);
+}
+/* A single 2px green rule marks the FiberSprung side. Nothing else. */
+.result--fs{border-top-color:var(--green-glow)}
+
+.result__label{
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-inv-2);
+  margin:0 0 var(--s4);
+}
+.result--fs .result__label{color:var(--green-glow)}
+
+.result__body{
+  margin:0; color:var(--ink-inv); font-size:1.05rem; max-width:40ch;
+}
+
+/* ─────────── callout ─────────── */
+
+.callout{
+  border-left:2px solid var(--green);
+  padding:var(--s2) 0 var(--s2) var(--s5);
+  margin:var(--s9) 0 0;
+  max-width:var(--measure);
+}
+.callout p{margin:0; color:var(--ink-2)}
+.callout--dark{border-left-color:var(--green-glow)}
+.callout--dark p{color:var(--ink-inv); font-size:1.05rem}
+
+@media (min-width:900px){
+  .bend__method{padding:var(--s5) var(--s5) var(--s5) 0}
+  .bend__results{grid-template-columns:1fr 1fr; gap:var(--s6)}
+}
+
+/* The cutaway, relocated to the React entry in 08. */
+.range__cutaway{max-width:360px; margin-top:var(--s5)}
+
+/* Request pricing — a text link, deliberately not a button. green-deep
+   passes on this band (4.56:1 on concrete-deep since the v1.2 token fix). */
+.range__pricing{margin-top:var(--s5) !important}
+.pricing-link{
+  font-family:var(--data); font-size:12px; letter-spacing:.18em;
+  text-transform:uppercase; font-weight:500;
+  color:var(--green-deep); text-decoration:none;
+  display:inline-flex; align-items:center; gap:var(--s2);
+}
+.pricing-link__arrow{
+  display:inline-block;
+  transition:transform 180ms var(--ease-out);
+}
+.pricing-link:hover .pricing-link__arrow{transform:translateX(3px)}
+.pricing-link:hover{color:var(--green-deep)}
+
+/* ══════════════════════════════════════════════════════════════
+   06 · PROCESS
+   Dark. Five steps, numbered because the order is real information.
+   ══════════════════════════════════════════════════════════════ */
+
+.band--process .h2{margin-top:0}
+
+.steps{
+  list-style:none;
+  margin:var(--s9) 0 0;
+  padding:0;
+  counter-reset:none;
+}
+
+.step{
+  display:grid;
+  gap:var(--s5);
+  padding:var(--s7) 0;                /* ~30% down from 64px */
+  border-top:1px solid var(--line-dark);
+}
+.step:first-child{border-top:none; padding-top:0}
+
+.step__head{display:flex; align-items:baseline; gap:var(--s4)}
+
+.step__num{
+  font-family:var(--data);
+  font-size:11px;
+  letter-spacing:.2em;
+  color:var(--green-glow);
+  flex:none;
+  padding-top:2px;
+}
+
+.step__body{
+  margin:0;
+  color:var(--ink-inv-2);
+  max-width:52ch;
+}
+
+.step__figure{margin:0}
+.step__figure img{
+  width:100%; height:auto;
+}
+
+/* Transparent PNG on graphite. No background fill, no border, no grade —
+   the drawing is already light-on-nothing. Hard cap at native width. */
+.step__layout{max-width:477px}
+.step__layout img{
+  border-radius:0;
+  background:none;
+  opacity:.9;
+}
+
+/* Untreated CAD render. Black background, green grid. 4.78:1 strip, so it
+   spans the step rather than sitting in a column. Never above 980px native. */
+.step__render{
+  margin:0;
+  max-width:903px;              /* cad-fixed native width — never above */
+  background:var(--graphite);   /* matches the baked-in background */
+  overflow:hidden;
+}
+.step__render img{
+  width:100%; height:auto;
+  display:block;
+  filter:none;          /* explicit: the grade must never reach this image */
+}
+
+@media (min-width:900px){
+  .step{
+    grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
+    grid-template-areas:
+      "head  figure"
+      "body  figure";
+    grid-template-rows:auto 1fr;      /* body row soaks the slack: heading
+                                         and body sit together at the top
+                                         instead of drifting apart */
+    align-content:start;
+    gap:var(--s3) var(--s8);
+    padding:var(--s8) 0;              /* ~30% down from 96px */
+  }
+  .step__head  {grid-area:head}
+  .step__body  {grid-area:body; align-self:start; margin-top:var(--s2)}
+  .step__figure{grid-area:figure; align-self:start}
+
+  /* Alternate down the page: even steps carry the image on the left. */
+  .step:nth-child(even){
+    grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
+    grid-template-areas:
+      "figure head"
+      "figure body";
+  }
+
+  /* Step 01 carries two visuals: the dimensioned drawing sits in the figure
+     column beside the text, the wide render spans the full step beneath. */
+  .step--01{
+    grid-template-areas:
+      "head   figure"
+      "body   figure"
+      "render render";
+  }
+  .step__render{grid-area:render; margin-top:var(--s6)}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   07 · COMPARISON
+   Light. The table is the content. Hairlines only, no fills.
+   ══════════════════════════════════════════════════════════════ */
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px;
+  margin:-1px; padding:0; border:0;
+  clip:rect(0 0 0 0); clip-path:inset(50%);
+  overflow:hidden; white-space:nowrap;
+}
+
+.compare__wrap{margin-top:var(--s8)}
+
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  font-size:15px;
+}
+
+.compare th,
+.compare td{
+  text-align:left;
+  padding:var(--s4);
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+
+/* Column heads: mono label treatment, at 15px. */
+.compare thead th{
+  font-family:var(--data); font-size:15px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-2); font-weight:500;
+  border-bottom:1px solid var(--line);
+}
+.compare__corner{border-bottom:1px solid var(--line)}
+
+/* FiberSprung column rides a raised paper panel: every FS cell carries the
+   paper surface, and pseudo-elements on the first and last FS cells extend
+   it 24px past the table's top and bottom — the wrap's vertical padding is
+   the headroom they occupy. The soft per-cell shadows fuse into one column
+   shadow at this blur and alpha. The 2px green rule moves to the very top
+   of the extension. */
+.compare__wrap{padding:24px 0}
+
+.compare .compare__fs{
+  background:var(--paper);
+  position:relative;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.compare thead th.compare__fs{color:var(--green-deep)}
+.compare thead th.compare__fs::before{
+  content:"";
+  position:absolute; left:0; right:0; bottom:100%; height:24px;
+  background:var(--paper);
+  border-top:2px solid var(--green);
+  border-radius:5px 5px 0 0;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.compare tbody tr:last-child td.compare__fs::after{
+  content:"";
+  position:absolute; left:0; right:0; top:100%; height:24px;
+  background:var(--paper);
+  border-radius:0 0 5px 5px;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+
+/* Row labels. */
+.compare tbody th{
+  font-weight:500;
+  color:var(--ink);
+  padding-left:0;
+}
+
+.compare tbody td{color:var(--ink-2); font-weight:400}
+.compare tbody td.compare__fs{color:var(--ink); font-weight:600}
+
+/* Row hover: a faint tint across the full row; the FS cell shifts within
+   its own paper surface so the sweep reads continuous. */
+.compare tbody tr td, .compare tbody tr th{transition:background 180ms linear}
+.compare tbody tr:hover th,
+.compare tbody tr:hover td{background:rgba(19,22,20,.04)}
+.compare tbody tr:hover td.compare__fs{background:#F1F3F0}
+
+.compare .num{font-family:var(--data); font-variant-numeric:tabular-nums}
+
+/* The water damage row. Emphasis by weight, size and space — never by fill
+   or colour. */
+.compare tr.is-key th,
+.compare tr.is-key td{
+  padding-top:var(--s5);
+  padding-bottom:var(--s5);
+  font-size:1.02rem;
+  color:var(--ink);
+}
+.compare tr.is-key th{font-weight:600}
+.compare tr.is-key td.compare__fs{font-weight:600}
+
+/* ─────────── narrow: one block per row ─────────── */
+/* A four-column table cannot be read at 360px and a horizontal scroller
+   buries the comparison. Each row becomes its own block instead. The ARIA
+   roles in the markup keep the table semantics that display:block removes. */
+@media (max-width:720px){
+  .compare,
+  .compare thead,
+  .compare tbody,
+  .compare tr,
+  .compare th,
+  .compare td{display:block}
+
+  /* Clipped, not display:none — it must stay in the accessibility tree. */
+  .compare thead{
+    position:absolute; width:1px; height:1px;
+    margin:-1px; overflow:hidden; clip-path:inset(50%);
+  }
+
+  .compare tbody tr{
+    border-top:1px solid var(--line);
+    padding:var(--s5) 0;
+  }
+  .compare tbody tr:first-child{border-top:none}
+
+  .compare tbody th{
+    padding:0 0 var(--s4);
+    border-bottom:none;
+    font-family:var(--display); font-weight:700;
+    font-size:1.15rem; letter-spacing:-.018em;
+  }
+
+  .compare tbody td{
+    display:grid;
+    grid-template-columns:minmax(0,10ch) minmax(0,1fr);
+    gap:var(--s4);
+    padding:var(--s2) 0;
+    border-bottom:none;
+  }
+  .compare tbody td::before{
+    content:attr(data-label);
+    font-family:var(--data); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-2);
+    padding-top:4px;
+  }
+  .compare tbody td.compare__fs::before{color:var(--green-deep)}
+
+  /* The green rule follows the FiberSprung value into the stacked layout. */
+  .compare tbody td.compare__fs{
+    border-left:2px solid var(--green);
+    padding-left:var(--s4);
+    margin-left:calc(var(--s2) * -1);
+  }
+
+  .compare tr.is-key th,
+  .compare tr.is-key td{padding-top:var(--s2); padding-bottom:var(--s2)}
+  .compare tr.is-key th{padding-bottom:var(--s4)}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   08 · RANGE
+   Light, alternating band. Typographic and spec-driven — the four floors
+   carry no imagery. Only React has swatches.
+   ══════════════════════════════════════════════════════════════ */
+
+.band--alt{background:var(--concrete-deep)}
+
+.range{
+  list-style:none;
+  margin:var(--s9) 0 0;
+  padding:0;
+}
+
+.range__item{
+  display:grid;
+  gap:var(--s5);
+  padding:var(--s8) 0;
+  border-top:1px solid var(--line);
+}
+.range__item:first-child{border-top:none; padding-top:0}
+
+.range__head{
+  margin:0;
+  font-size:clamp(1.3rem, 2.4vw, 1.65rem);
+  letter-spacing:-.02em;
+}
+.range__name{color:var(--ink)}
+.range__tag{color:var(--ink-2); font-weight:500}
+
+.range__body p{margin:0 0 var(--s4); color:var(--ink-2); max-width:56ch}
+.range__body p:last-child{margin-bottom:0}
+
+.range__users{
+  font-family:var(--data);
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-2);
+  margin-top:var(--s5) !important;
+  padding-top:var(--s4);
+  border-top:1px solid var(--line);
+  max-width:52ch;
+}
+
+.range__specs{
+  list-style:none; margin:0; padding:0;
+  border-top:1px solid var(--line);
+}
+.range__specs li{
+  padding:var(--s3) 0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  color:var(--ink-2);
+}
+.range__k{
+  font-family:var(--data); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink);
+  margin-right:var(--s2);
+}
+
+.range__cta{margin-top:var(--s6) !important}
+
+/* React swatches — the only images in this section. Contained; both files
+   are ~930px native and are never displayed near that. */
+.range__swatches{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:var(--s4);
+  max-width:420px;
+}
+.swatch{margin:0}
+.swatch img{
+  width:100%; height:auto;
+  background:var(--concrete);
+}
+
+.range__item--soon .range__head .range__tag{color:var(--green-deep)}
+
+@media (min-width:900px){
+  .range__item{
+    grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+    grid-template-areas:
+      "head  specs"
+      "body  specs";
+    align-content:start;
+    gap:var(--s5) var(--s8);
+    padding:var(--s9) 0;
+  }
+  .range__head {grid-area:head}
+  .range__body {grid-area:body}
+  .range__specs{grid-area:specs; align-self:start}
+
+  .range__item--react{
+    grid-template-areas:
+      "head     specs"
+      "body     specs"
+      "swatches specs";
+  }
+  .range__swatches{grid-area:swatches; margin-top:var(--s6)}
+
+  .range__item--soon{
+    grid-template-areas:
+      "head  ."
+      "body  .";
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   09 · ORIGIN
+   Light. The story leads; the photograph stays quiet beside it.
+   ══════════════════════════════════════════════════════════════ */
+
+.origin{display:grid; gap:var(--s6); align-items:start}
+
+.origin__body p{
+  margin:0 0 var(--s5);
+  color:var(--ink-2);
+  max-width:var(--measure);
+}
+.origin__body p:last-child{margin-bottom:0}
+
+/* Quiet: contained well below native width, never a feature. */
+.origin__figure{max-width:400px}
+
+/* ─────────── team ─────────── */
+
+.team{
+  margin-top:var(--s9);
+  padding-top:var(--s7);
+  border-top:1px solid var(--line);
+}
+
+.team__grid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:var(--s6) var(--s5);
+  margin:0;
+}
+
+/* Tablet: two across. */
+@media (max-width:999px){
+  .team__grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+}
+
+/* Mobile: one horizontal scroll row with snap. */
+@media (max-width:559px){
+  .team__grid{
+    display:flex;
+    overflow-x:auto;
+    gap:var(--s5);
+    padding-bottom:var(--s3);
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .team__person{flex:0 0 auto; width:140px; scroll-snap-align:start}
+}
+
+/* Uniform square crops. The files arrive pre-grayscaled; the technical
+   grade class documents the treatment and normalises contrast with the
+   dark-section imagery. */
+.team__photo{
+  width:120px; height:120px;
+  object-fit:cover;
+  border-radius:3px;
+  display:block;
+  margin-bottom:var(--s3);
+}
+
+.team__person dt{margin-bottom:var(--s2)}
+.team__name{
+  font-family:var(--display); font-weight:700;
+  font-size:1.05rem; letter-spacing:-.018em;
+  color:var(--ink);
+  display:block;
+}
+
+/* Mono, but sentence case — uppercasing "Palm Tree Climber" would sand off
+   exactly the warmth these descriptors exist to carry. */
+.team__person dd{
+  margin:0;
+  font-family:var(--data);
+  font-size:11px; line-height:1.7; letter-spacing:.04em;
+  color:var(--ink-2);
+}
+
+@media (min-width:900px){
+  .origin{
+    grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
+    grid-template-areas:
+      "head figure"
+      "body figure";
+    gap:var(--s6) var(--s8);
+  }
+  .origin__head  {grid-area:head}
+  .origin__body  {grid-area:body}
+  .origin__figure{grid-area:figure; align-self:start}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   10 · PAYOFF
+   Light, full colour. Sizes are set by what each file can carry, not by
+   what the composition would prefer.
+   ══════════════════════════════════════════════════════════════ */
+
+.payoff__grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:var(--s4);
+  align-items:start;
+  margin-top:var(--s8);
+}
+
+/* The three finished-floor frames carry enough resolution to run wide. */
+.p--dark,
+.p--simple,
+.p--edge{grid-column:span 2}
+
+/* RIGHTS-PENDING files, and the two smallest on the page. The hard cap is at
+   native resolution: no grid change, breakpoint or later edit can enlarge
+   them past it. The mapping is explicit — contained only, never full bleed. */
+.p--class{grid-column:span 1; max-width:413px}
+.p--event{grid-column:span 1; max-width:398px}
+
+@media (min-width:900px){
+  .payoff__grid{
+    grid-template-columns:repeat(12, minmax(0,1fr));
+    gap:var(--s5);
+  }
+  .p--dark  {grid-column:span 5}
+  .p--simple{grid-column:span 7}
+  .p--edge  {grid-column:span 5}
+  .p--class {grid-column:span 3}
+  .p--event {grid-column:span 4}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   11 · CONTACT
+   ══════════════════════════════════════════════════════════════ */
+
+.contact{
+  display:grid;
+  gap:var(--s8);
+  margin-top:var(--s8);
+  align-items:start;
+}
+
+/* ─────────── form ─────────── */
+
+.quote{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:var(--s5);
+}
+
+/* Strict pairs: space+sqft / timeline+name / email+phone. */
+.field{display:flex; flex-direction:column; gap:var(--s2)}
+
+.field label{
+  font-family:var(--data); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-2);
+}
+
+.field input,
+.field select{
+  font-family:var(--body);
+  font-size:16px;                 /* 16px avoids the iOS zoom-on-focus jump */
+  color:var(--ink);
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:0 var(--s4);
+  width:100%;
+  height:48px;
+}
+
+/* The focus ring is where the brand colour earns its place. */
+.field input:focus,
+.field select:focus{
+  outline:none;
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(112,171,65,.15);
+}
+.field select{
+  appearance:none;
+  background-image:linear-gradient(45deg, transparent 50%, var(--ink-2) 50%),
+                   linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+  background-position:calc(100% - 20px) 50%, calc(100% - 14px) 50%;
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:var(--s8);
+}
+.field input:hover,
+.field select:hover{border-color:var(--ink-2)}
+
+.quote__submit{grid-column:span 2; margin-top:var(--s3)}
+/* Brand-green submit. CONTRAST NOTE: white on #70AB41 is 2.75:1 — same
+   as the chat pill, spec'd explicitly, on the open-items list. */
+.quote__submit .btn{
+  background:var(--green); border:1px solid var(--green); color:#fff;
+  cursor:pointer;
+}
+.quote__submit .btn:hover{
+  background:var(--green);
+  box-shadow:0 6px 20px rgba(112,171,65,.3);
+}
+
+/* ─────────── asides and direct contact ─────────── */
+
+.contact__side{display:grid; gap:var(--s6); align-content:start}
+
+.aside{
+  border-left:2px solid var(--green);
+  padding:var(--s2) 0 var(--s2) var(--s5);
+}
+.aside h3{font-size:1.05rem; margin-bottom:var(--s3)}
+.aside p{margin:0; color:var(--ink-2); font-size:14px; max-width:44ch}
+
+.contact__direct{
+  border-top:1px solid var(--line);
+  padding-top:var(--s5);
+  display:flex; flex-wrap:wrap; gap:var(--s3);
+}
+.contact-pill{
+  display:inline-flex; align-items:center; gap:var(--s2);
+  font-family:var(--data); font-size:14px;
+  color:var(--ink); text-decoration:none;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 18px;
+  transition:transform var(--micro) var(--ease-out),
+             border-color var(--micro) linear,
+             color var(--micro) linear;
+}
+.contact-pill:hover{
+  transform:translateY(-2px);
+  border-color:var(--green);
+  color:var(--green-deep);
+}
+.contact-pill svg{flex:none}
+
+/* ─────────── footer ─────────── */
+
+.site-footer{
+  background:var(--concrete-deep);   /* continues the alternation after 11 */
+  padding:var(--s8) 0 var(--s10);
+}
+.site-footer__patents{
+  margin:0 0 var(--s5);
+  color:var(--ink-2);
+  font-size:13px;
+  line-height:2;
+}
+.site-footer__copy{
+  margin:0;
+  font-family:var(--data); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-2);
+}
+
+@media (min-width:900px){
+  .contact{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:var(--s10)}
+}
+
+@media (max-width:560px){
+  .quote{grid-template-columns:1fr}
+  .field:nth-child(-n+3),
+  .quote__submit{grid-column:span 1}
+}
+
+/* ─────────── shared scroll reveal ─────────── */
+/* Short travel — 16–24px. Long travel reads as cheap.
+   Hidden state scoped to html.js: no JS means visible content, not a
+   blank page. See the guard in the head of index.html. */
+.js-reveal{
+  transition:opacity var(--enter) var(--ease-out),
+             transform var(--enter) var(--ease-out);
+}
+.js .js-reveal{
+  opacity:0;
+  transform:translateY(20px);
+}
+.js .js-reveal.is-in{opacity:1; transform:none}
+
+/* Stagger delays are written inline by script.js, clamped to the 80–120ms
+   band and to four items. This resets them if the group is ever re-used
+   in a context where the JS has not run. */
+[data-reveal-stagger] .js-reveal{transition-delay:0ms}
+
+/* ─────────── reduced motion: final state, instantly ─────────── */
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+
+  /* Hero: no drift, no entrance. Handled in the hero block above; repeated
+     here only so the intent is visible in one place. */
+  .hero__img{animation:none !important; transform:none !important}
+  .hero__plane{transform:none !important}
+  .hero__eyebrow,
+  .hero__title,
+  .hero__sub,
+  .hero__actions{animation:none !important}
+
+  /* Tech stage: static contained frame, no runway, no scrub. */
+  .js .tech-stage{height:auto}
+  .js .tech-stage__pin{position:static; height:auto; overflow:visible; display:block}
+  .js .tech-stage__frame{width:auto; height:auto; transform:none; border-radius:0; padding:var(--s9) 0 0; overflow:visible}
+  .js .tech-stage__plane{display:flex; flex-direction:column-reverse; position:static; height:auto; transform:none !important}
+  .js .tech-stage__img{position:static; height:auto; object-fit:fill}
+  .js .tech-stage__scrim{display:none}
+  .js .tech-stage__caption{position:static; padding-bottom:var(--s7); opacity:1 !important; transform:none !important}
+  .js .tech-stage__line, .js .tech-stage__sub{opacity:1 !important; transform:none !important}
+  .js .tech-detail{margin-top:0; border-radius:0; box-shadow:none}
+
+  /* No hover zoom — a 700ms scale is still motion. */
+  .figure:hover img, .swatch:hover img, .step__figure:hover img,
+  .step__render:hover img, .bend__diagram:hover img{transform:none}
+
+  /* Marquee off; the AT list becomes the visible, centered credential band. */
+  .marquee{display:none}
+  .recog-static{
+    position:static; width:auto; height:auto;
+    margin:var(--s7) auto 0; padding:0 var(--gutter);
+    clip:auto; clip-path:none; overflow:visible; white-space:normal;
+    display:flex; flex-wrap:wrap; justify-content:center;
+    gap:var(--s5) var(--s7);
+    max-width:1180px;
+  }
+  .recog-static li{
+    font-family:var(--display); font-weight:500;
+    font-size:clamp(1.25rem, 1.7vw, 1.375rem);
+    color:var(--ink); letter-spacing:.01em;
+  }
+
+  /* No delays either — a stagger is still motion. */
+  .js .js-reveal{opacity:1; transform:none; transition-delay:0ms !important}
+
+}
